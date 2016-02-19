@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_host" >
+        <EditTextPreference
+            android:title="@string/apikey"
+            android:summary="@string/pref_apikey"
+            android:defaultValue="1234567890"
+            android:key="prefApikey"/>
+        <EditTextPreference
+            android:title="@string/xmpphost"
+            android:summary="@string/pref_xmpphost"
+            android:defaultValue="192.168.0.1"
+            android:key="prefXmpphost"/>
+        <EditTextPreference
+            android:title="@string/xmppport"
+            android:summary="@string/pref_xmppport"
+            android:defaultValue="5222"
+            android:key="prefXmppport"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_notify_settings" >
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="SETTINGS_SOUND_ENABLED"
+        android:summary="@string/pref_notify"
+        android:title="@string/notify" >
+    </CheckBoxPreference>
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="SETTINGS_SOUND_ENABLED"
+        android:summary="@string/pref_sound"
+        android:title="@string/sound" >
+    </CheckBoxPreference>
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="SETTINGS_VIBRATE_ENABLED"
+        android:summary="@string/pref_vibrate"
+        android:title="@string/vibrate" >
+    </CheckBoxPreference>
+    </PreferenceCategory>
+</PreferenceScreen>
