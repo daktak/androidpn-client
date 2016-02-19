@@ -2,6 +2,14 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/pref_host" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefAutostart"
+            android:summary="@string/pref_auto"
+            android:title="@string/auto" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_host" >
         <EditTextPreference
             android:title="@string/apikey"
             android:summary="@string/pref_apikey"
@@ -21,21 +29,27 @@
     <PreferenceCategory android:title="@string/pref_notify_settings" >
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="SETTINGS_SOUND_ENABLED"
+        android:key="prefNtfy"
         android:summary="@string/pref_notify"
         android:title="@string/notify" >
     </CheckBoxPreference>
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="SETTINGS_SOUND_ENABLED"
+        android:key="prefSound"
         android:summary="@string/pref_sound"
         android:title="@string/sound" >
     </CheckBoxPreference>
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="SETTINGS_VIBRATE_ENABLED"
+        android:key="prefVibrate"
         android:summary="@string/pref_vibrate"
         android:title="@string/vibrate" >
     </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefToast"
+            android:summary="@string/pref_toast"
+            android:title="@string/toast" >
+        </CheckBoxPreference>
     </PreferenceCategory>
 </PreferenceScreen>

@@ -35,6 +35,11 @@
 				<action android:name="org.androidpn.client.client.NotificationService.NotificationService" />
 			</intent-filter>
 		</service>
+        <receiver android:name=".MyBroadcastreceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         </application>
     	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -42,5 +47,6 @@
         <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
         <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
         <uses-permission android:name="android.permission.VIBRATE" />
+        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     </manifest>
 

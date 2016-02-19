@@ -16,5 +16,9 @@
     <string name="pref_xmpphost">Your servers name or IP</string>
     <string name="xmppport">XMPP Port</string>
     <string name="pref_xmppport"></string>
-
+    <string name="toast">Toast</string>
+    <string name="pref_toast">Popup Notification</string>
+    <string name="pref_settings">Settings</string>
+    <string name="pref_auto">Run the service on boot</string>
+    <string name="auto">Auto Start</string>
 </resources>

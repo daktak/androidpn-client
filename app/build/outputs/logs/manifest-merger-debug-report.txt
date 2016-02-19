@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:2:1-45:16
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:2:1-51:16
 	xmlns:android
 		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:2:11-69
 	package
@@ -14,7 +14,7 @@ ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManif
 		INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml
 		INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml
 application
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:5:5-38:23
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:5:5-43:23
 MERGED from [com.android.support:appcompat-v7:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/AndroidManifest.xml:22:5-20
@@ -78,30 +78,44 @@ action#org.androidpn.client.client.NotificationService.NotificationService
 ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:35:5-98
 	android:name
 		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:35:13-95
+receiver#client.androidpn.org.androidpnclient.MyBroadcastreceiver
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:38:9-42:20
+	android:name
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:38:19-54
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:39:13-41:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:40:17-79
+	android:name
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:40:25-76
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:39:6-76
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:44:6-76
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:39:23-73
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:44:23-73
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:40:9-83
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:45:9-83
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:40:26-80
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:45:26-80
 uses-permission#android.permission.INTERNET
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:41:9-71
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:46:9-71
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:41:26-68
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:46:26-68
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:42:9-80
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:47:9-80
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:42:26-77
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:47:26-77
 uses-permission#android.permission.CHANGE_WIFI_STATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:43:9-80
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:48:9-80
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:43:26-77
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:48:26-77
 uses-permission#android.permission.VIBRATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:44:9-70
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:49:9-70
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:44:26-67
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:49:26-67
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:50:9-85
+	android:name
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:50:26-82
 uses-sdk
 INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:20:5-43

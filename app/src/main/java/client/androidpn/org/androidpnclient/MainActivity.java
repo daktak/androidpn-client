@@ -2,6 +2,8 @@ package client.androidpn.org.androidpnclient;
 
 import client.androidpn.org.client.Constants;
 import client.androidpn.org.client.ServiceManager;
+
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,16 +19,17 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    ServiceManager serviceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-        loadPref();
+        //PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+        //loadPref();
         // Start the service
-        ServiceManager serviceManager = new ServiceManager(this);
+        serviceManager = new ServiceManager(this);
         serviceManager.setNotificationIcon(R.drawable.notification);
         serviceManager.startService();
     }
@@ -65,12 +68,21 @@ public class MainActivity extends AppCompatActivity {
        * To make it simple, always re-load Preference setting.
        */
 
-        loadPref();
+       // loadPref();
+        try {
+            serviceManager.stopService();
+            serviceManager.startService();
+        }
+        catch (Exception e) {
+            serviceManager = new ServiceManager(this);
+            serviceManager.setNotificationIcon(R.drawable.notification);
+            serviceManager.startService();
+        }
     }
-
+/*
     private void loadPref() {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
+        //SharedPreferences sharedPrefs = notificationService.getSharedPreferences();
 //      boolean my_checkbox_preference = mySharedPreferences.getBoolean(Constants.SETTINGS_SOUND_ENABLED, true);
   //      CheckBoxPreference sound = findViewById(R.xml.settings.SETTINGS_SOUND_ENABLED);
         //SETTINGS_SOUND_ENABLED.setChecked(my_checkbox_preference);
@@ -79,5 +91,6 @@ public class MainActivity extends AppCompatActivity {
          prefEditText.setText(my_edittext_preference);
      */
 
-    }
+  //  }
+
 }

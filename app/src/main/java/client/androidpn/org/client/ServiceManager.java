@@ -74,11 +74,34 @@ public final class ServiceManager {
         apiKey = mySharedPreferences.getString("prefApikey", "1234567890");
         xmppHost = mySharedPreferences.getString("prefXmpphost", "192.168.0.1");
         xmppPort = mySharedPreferences.getString("prefXmppport", "5222");
+        boolean prefNtfy = mySharedPreferences.getBoolean("prefNtfy",true);
+        boolean prefSound = mySharedPreferences.getBoolean("prefSound",true);
+        boolean prefVibrate = mySharedPreferences.getBoolean("prefVibrate",true);
+        boolean prefToast = mySharedPreferences.getBoolean("prefToast",false);
 
         Log.i(LOGTAG, "apiKey=" + apiKey);
         Log.i(LOGTAG, "xmppHost=" + xmppHost);
         Log.i(LOGTAG, "xmppPort=" + xmppPort);
-
+        if (prefNtfy) {
+            Log.i(LOGTAG, "prefNty is true");
+        }else {
+            Log.i(LOGTAG, "prefNtfy is false");
+        }
+        if (prefSound) {
+            Log.i(LOGTAG, "prefSound is true");
+        }else {
+            Log.i(LOGTAG, "prefSound is false");
+        }
+        if (prefVibrate) {
+            Log.i(LOGTAG, "prefVibrate is true");
+        }else {
+            Log.i(LOGTAG, "prefVibrate is false");
+        }
+        if (prefToast) {
+            Log.i(LOGTAG, "prefToast is true");
+        }else {
+            Log.i(LOGTAG, "prefToast is false");
+        }
         sharedPrefs = context.getSharedPreferences(
                 Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         Editor editor = sharedPrefs.edit();
@@ -86,6 +109,20 @@ public final class ServiceManager {
         editor.putString(Constants.API_KEY, apiKey);
         editor.putString(Constants.VERSION, version);
         editor.putString(Constants.XMPP_HOST, xmppHost);
+        try {
+            editor.remove(Constants.SETTINGS_NOTIFICATION_ENABLED);
+            editor.remove(Constants.SETTINGS_SOUND_ENABLED);
+            editor.remove(Constants.SETTINGS_VIBRATE_ENABLED);
+            editor.remove(Constants.SETTINGS_TOAST_ENABLED);
+        } catch (Exception e) {
+            Log.d(LOGTAG, "Settings not removed");
+        }
+
+        editor.putBoolean(Constants.SETTINGS_NOTIFICATION_ENABLED, prefNtfy);
+        editor.putBoolean(Constants.SETTINGS_SOUND_ENABLED, prefSound);
+        editor.putBoolean(Constants.SETTINGS_VIBRATE_ENABLED, prefVibrate);
+        editor.putBoolean(Constants.SETTINGS_TOAST_ENABLED, prefToast);
+
         editor.putInt(Constants.XMPP_PORT, Integer.parseInt(xmppPort));
         editor.putString(Constants.CALLBACK_ACTIVITY_PACKAGE_NAME,
                 callbackActivityPackageName);
