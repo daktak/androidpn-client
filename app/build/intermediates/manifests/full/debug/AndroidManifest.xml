@@ -28,6 +28,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="org.androidpn.demoapp.SetPreferenceActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <category android:name="android.intent.category.PREFERENCE" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="org.androidpn.client.NotificationDetailsActivity"
             android:label="Notification Details" >
         </activity>

@@ -23,6 +23,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
+import android.preference.PreferenceManager;
+
+import org.androidpn.demoapp.DemoAppActivity;
 
 /** 
  * This class is to manage the notificatin service and to load the configuration.
@@ -37,8 +40,6 @@ public final class ServiceManager {
     private Context context;
 
     private SharedPreferences sharedPrefs;
-
-    private Properties props;
 
     private String version = "0.5.0";
 
@@ -69,10 +70,13 @@ public final class ServiceManager {
         //        //            throw new RuntimeException();
         //        //        }
 
-        props = loadProperties();
-        apiKey = props.getProperty("apiKey", "");
-        xmppHost = props.getProperty("xmppHost", "127.0.0.1");
-        xmppPort = props.getProperty("xmppPort", "5222");
+
+        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        apiKey = mySharedPreferences.getString("prefApikey", "1234567890");
+        xmppHost = mySharedPreferences.getString("prefXmpphost", "192.168.0.1");
+        xmppPort = mySharedPreferences.getString("prefXmppport", "5222");
+
         Log.i(LOGTAG, "apiKey=" + apiKey);
         Log.i(LOGTAG, "xmppHost=" + xmppHost);
         Log.i(LOGTAG, "xmppPort=" + xmppPort);
@@ -80,6 +84,7 @@ public final class ServiceManager {
         sharedPrefs = context.getSharedPreferences(
                 Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         Editor editor = sharedPrefs.edit();
+
         editor.putString(Constants.API_KEY, apiKey);
         editor.putString(Constants.VERSION, version);
         editor.putString(Constants.XMPP_HOST, xmppHost);
@@ -96,7 +101,12 @@ public final class ServiceManager {
         Thread serviceThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Intent intent = NotificationService.getIntent();
+                //Intent intent = NotificationService.getIntent();
+                //Intent intent = new Intent(context, NotificationService.SERVICE_NAME);
+                //context.startService(intent);
+
+                Intent intent = new Intent();
+                intent.setClass(context, NotificationService.class);
                 context.startService(intent);
             }
         });

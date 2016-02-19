@@ -2,18 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/home/daktak/StudioProjects/androidpn-client-0.5.01/app/src/main/lib/asmack.jar"
+        jar="/home/daktak/StudioProjects/androidpn-client/app/src/main/lib/asmack.jar"
         jumboMode="false"
         revision="21.0.0"
         sha1="fe03343aa1bcebe304b71c2c4ca64e447b86d565">
-        <dex dex="/home/daktak/StudioProjects/androidpn-client-0.5.01/app/build/intermediates/pre-dexed/release/asmack-ae41ffe568cc1c6d3908c9f9e12a6423416d3212.jar" />
-    </item>
-    <item
-        jar="/home/daktak/StudioProjects/androidpn-client-0.5.01/app/src/main/lib/asmack.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="fe03343aa1bcebe304b71c2c4ca64e447b86d565">
-        <dex dex="/home/daktak/StudioProjects/androidpn-client-0.5.01/app/build/intermediates/pre-dexed/release/asmack-ae41ffe568cc1c6d3908c9f9e12a6423416d3212.jar" />
+        <dex dex="/home/daktak/StudioProjects/androidpn-client/app/build/intermediates/pre-dexed/debug/asmack-b33551f6f91c9f0fd10845bf6381adb55c1cb3a2.jar" />
     </item>
 
 </items>
