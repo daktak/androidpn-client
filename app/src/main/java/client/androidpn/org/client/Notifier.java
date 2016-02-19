@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -32,6 +33,7 @@ import java.util.Random;
  * @author Sehwan Noh (devnoh@gmail.com)
  */
 public class Notifier {
+    private PNNotificationDataSource datasource;
 
     private static final String LOGTAG = LogUtil.makeLogTag(Notifier.class);
 
@@ -67,7 +69,7 @@ public class Notifier {
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             }
 
-            // Notification
+            // PNNotification
             int ntfyDefaults = Notification.DEFAULT_LIGHTS;
             if (isNotificationSoundEnabled()) {
                 ntfyDefaults |= Notification.DEFAULT_SOUND;
@@ -85,7 +87,7 @@ public class Notifier {
                     .setTicker(message)
                     .build();
 
-            //notification.flags |= Notification.FLAG_AUTO_CANCEL;
+            //notification.flags |= PNNotification.FLAG_AUTO_CANCEL;
 
             //            Intent intent;
             //            if (uri != null
@@ -156,6 +158,14 @@ public class Notifier {
         } else {
             Log.w(LOGTAG, "Notificaitons disabled.");
         }
+
+        datasource = new PNNotificationDataSource(context);
+        datasource.open();
+        datasource.createNotification(title, message);
+        datasource.close();
+        /*
+        ArrayAdapter<PNNotification> adapter = (ArrayAdapter<PNNotification>) getAdapter();
+        adapter.add(title+"\n"+message);*/
     }
 
     private int getNotificationIcon() {

@@ -1,25 +1,26 @@
 package client.androidpn.org.androidpnclient;
 
-import client.androidpn.org.client.Constants;
+import client.androidpn.org.client.PNNotificationDataSource;
+import client.androidpn.org.client.PNNotification;
 import client.androidpn.org.client.ServiceManager;
 
-import android.content.BroadcastReceiver;
+import android.app.Notification;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    ArrayList<String> animalsNameList;
     ServiceManager serviceManager;
+    private PNNotificationDataSource datasource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,16 @@ public class MainActivity extends AppCompatActivity {
         //PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         //loadPref();
         // Start the service
+        ListView notifyList=(ListView)findViewById(R.id.listView);
+        datasource = new PNNotificationDataSource(this);
+        datasource.open();
+
+
+        List<PNNotification> values = datasource.getAllNotifications();
+        ArrayAdapter<PNNotification> adapter = new ArrayAdapter<PNNotification>(this,
+                android.R.layout.simple_list_item_1, values);
+        notifyList.setAdapter(adapter);
+
         serviceManager = new ServiceManager(this);
         serviceManager.setNotificationIcon(R.drawable.notification);
         serviceManager.startService();
@@ -92,5 +103,15 @@ public class MainActivity extends AppCompatActivity {
      */
 
   //  }
+  @Override
+  protected void onResume() {
+      datasource.open();
+      super.onResume();
+  }
 
+    @Override
+    protected void onPause() {
+        datasource.close();
+        super.onPause();
+    }
 }

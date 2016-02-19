@@ -228,16 +228,10 @@ public final class ServiceManager {
         editor.commit();
     }
 
-    //    public void viewNotificationSettings() {
-    //        Intent intent = new Intent().setClass(context,
-    //                NotificationSettingsActivity.class);
-    //        context.startActivity(intent);
-    //    }
-
-    public static void viewNotificationSettings(Context context) {
-        Intent intent = new Intent().setClass(context,
-                NotificationSettingsActivity.class);
-        context.startActivity(intent);
-    }
+    //public static void viewNotificationSettings(Context context) {
+    //    Intent intent = new Intent().setClass(context,
+    //            NotificationSettingsActivity.class);
+    //    context.startActivity(intent);
+    //}
 
 }

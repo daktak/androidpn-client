@@ -12,8 +12,10 @@
     tools:context="client.androidpn.org.androidpnclient.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:id="@+id/listView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
