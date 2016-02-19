@@ -44,8 +44,8 @@ public class DemoAppActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        //PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-        //final Intent i = new Intent(this, MyPreferencesActivity.class);
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+
         // Settings
         loadPref();
         Button okButton = (Button) findViewById(R.id.btn_settings);

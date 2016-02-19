@@ -8,7 +8,7 @@
     <string name="sound">Sound</string>
     <string name="pref_sound">Play a sound for notifications</string>
     <string name="notify">Notifications Enabled</string>
-    <string name="pref_notify">Receive psh messages</string>
+    <string name="pref_notify">Receive push messages</string>
     <string name="vibrate">Vibrate</string>
     <string name="pref_vibrate">Vibrate the phone for notifications</string>
     <string name="apikey">API Key</string>
