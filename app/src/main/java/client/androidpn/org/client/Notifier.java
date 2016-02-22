@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+import client.androidpn.org.androidpnclient.MainActivity;
+
 /** 
  * This class is to notify the user of messages with NotificationManager.
  *
@@ -107,7 +109,7 @@ public class Notifier {
             //            }
 
             Intent intent = new Intent(context,
-                    NotificationDetailsActivity.class);
+            NotificationDetailsActivity.class);
             intent.putExtra(Constants.NOTIFICATION_ID, notificationId);
             intent.putExtra(Constants.NOTIFICATION_API_KEY, apiKey);
             intent.putExtra(Constants.NOTIFICATION_TITLE, title);
@@ -124,7 +126,7 @@ public class Notifier {
 
             //notification.setLatestEventInfo(context, title, message,
             //        contentIntent);
-            //notificationManager.notify(random.nextInt(), notification);
+            notificationManager.notify(random.nextInt(), notification);
 
             //            Intent clickIntent = new Intent(
             //                    Constants.ACTION_NOTIFICATION_CLICKED);
@@ -163,9 +165,9 @@ public class Notifier {
         datasource.open();
         datasource.createNotification(title, message);
         datasource.close();
-        /*
-        ArrayAdapter<PNNotification> adapter = (ArrayAdapter<PNNotification>) getAdapter();
-        adapter.add(title+"\n"+message);*/
+        //MainActivity main = (MainActivity) context;
+        //ArrayAdapter<PNNotification> adapter = main.getAdapter();
+        //adapter.notifyDataSetChanged();
     }
 
     private int getNotificationIcon() {

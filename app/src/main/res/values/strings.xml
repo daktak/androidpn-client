@@ -15,7 +15,7 @@
     <string name="xmpphost">XMPP Host</string>
     <string name="pref_xmpphost">Your servers name or IP</string>
     <string name="xmppport">XMPP Port</string>
-    <string name="pref_xmppport"></string>
+    <string name="pref_xmppport">Port</string>
     <string name="toast">Toast</string>
     <string name="pref_toast">Popup Notification</string>
     <string name="pref_settings">Settings</string>

@@ -4,9 +4,9 @@ import client.androidpn.org.client.PNNotificationDataSource;
 import client.androidpn.org.client.PNNotification;
 import client.androidpn.org.client.ServiceManager;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<String> animalsNameList;
     ServiceManager serviceManager;
+    ArrayAdapter<PNNotification> adapter;
     private PNNotificationDataSource datasource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         //loadPref();
         // Start the service
         ListView notifyList=(ListView)findViewById(R.id.listView);
@@ -36,13 +36,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         List<PNNotification> values = datasource.getAllNotifications();
-        ArrayAdapter<PNNotification> adapter = new ArrayAdapter<PNNotification>(this,
+        adapter = new ArrayAdapter<PNNotification>(this,
                 android.R.layout.simple_list_item_1, values);
         notifyList.setAdapter(adapter);
 
         serviceManager = new ServiceManager(this);
         serviceManager.setNotificationIcon(R.drawable.notification);
         serviceManager.startService();
+    }
+
+    public ArrayAdapter<PNNotification> getAdapter() {
+        return adapter;
     }
 
     @Override
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
@@ -106,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
       datasource.open();
+      adapter.notifyDataSetChanged();
       super.onResume();
   }
 
