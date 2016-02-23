@@ -7,6 +7,7 @@ public class PNNotification {
     private long id;
     private String title;
     private String message;
+    private String uri;
 
     public long getId() {
         return id;
@@ -18,6 +19,14 @@ public class PNNotification {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri){
+        this.uri = uri;
     }
 
     public void setTitle(String title) {

@@ -82,26 +82,7 @@ public final class ServiceManager {
         Log.i(LOGTAG, "apiKey=" + apiKey);
         Log.i(LOGTAG, "xmppHost=" + xmppHost);
         Log.i(LOGTAG, "xmppPort=" + xmppPort);
-        if (prefNtfy) {
-            Log.i(LOGTAG, "prefNty is true");
-        }else {
-            Log.i(LOGTAG, "prefNtfy is false");
-        }
-        if (prefSound) {
-            Log.i(LOGTAG, "prefSound is true");
-        }else {
-            Log.i(LOGTAG, "prefSound is false");
-        }
-        if (prefVibrate) {
-            Log.i(LOGTAG, "prefVibrate is true");
-        }else {
-            Log.i(LOGTAG, "prefVibrate is false");
-        }
-        if (prefToast) {
-            Log.i(LOGTAG, "prefToast is true");
-        }else {
-            Log.i(LOGTAG, "prefToast is false");
-        }
+
         sharedPrefs = context.getSharedPreferences(
                 Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         Editor editor = sharedPrefs.edit();

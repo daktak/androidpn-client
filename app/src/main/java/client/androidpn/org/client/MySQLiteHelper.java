@@ -14,6 +14,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_MESSAGE = "message";
+    public static final String COLUMN_URI = "uri";
 
     private static final String DATABASE_NAME = "notifications.db";
     private static final int DATABASE_VERSION = 1;
@@ -23,6 +24,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + TABLE_NOTIFICATIONS + "(" + COLUMN_ID
             + " integer primary key autoincrement, " + COLUMN_TITLE
             + " text not null, " + COLUMN_MESSAGE
+            + " text not null, " + COLUMN_URI
             + " text not null);";
 
     public MySQLiteHelper(Context context) {

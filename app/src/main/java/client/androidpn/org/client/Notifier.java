@@ -23,11 +23,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import java.util.Random;
 
 import client.androidpn.org.androidpnclient.MainActivity;
+import client.androidpn.org.androidpnclient.R;
 
 /** 
  * This class is to notify the user of messages with NotificationManager.
@@ -163,11 +167,16 @@ public class Notifier {
 
         datasource = new PNNotificationDataSource(context);
         datasource.open();
-        datasource.createNotification(title, message);
+        datasource.createNotification(title, message, uri);
         datasource.close();
-        //MainActivity main = (MainActivity) context;
-        //ArrayAdapter<PNNotification> adapter = main.getAdapter();
-        //adapter.notifyDataSetChanged();
+
+        //Update the list view
+
+        if (MainActivity.instance != null) {
+            MainActivity.instance.resetList();
+        }
+
+
     }
 
     private int getNotificationIcon() {

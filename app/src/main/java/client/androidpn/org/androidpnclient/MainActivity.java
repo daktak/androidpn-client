@@ -1,7 +1,7 @@
 package client.androidpn.org.androidpnclient;
 
+import client.androidpn.org.client.LogUtil;
 import client.androidpn.org.client.PNNotificationDataSource;
-import client.androidpn.org.client.PNNotification;
 import client.androidpn.org.client.ServiceManager;
 
 import android.content.Intent;
@@ -9,18 +9,40 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+
+/* TODO
+ * refresh list on notification
+ * remove space / trim settings hostname
+ * newest on top
+ * swipe to dismiss
+ * URI / click to load
+ * long click / copy text
+ * create message
+ * settings / header
+ * selectable themes
+ * List view layout / title / descr
+ * click notification to load app
+ */
 
 public class MainActivity extends AppCompatActivity {
-    ServiceManager serviceManager;
-    ArrayAdapter<PNNotification> adapter;
-    private PNNotificationDataSource datasource;
+
+    public static MainActivity instance = null;
+    private static final int REQUEST_PREFS = 1;
+    private ServiceManager serviceManager;
+    private static final String LOGTAG = LogUtil
+            .makeLogTag(MainActivity.class);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,24 +51,34 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         //loadPref();
+
+        resetList();
         // Start the service
-        ListView notifyList=(ListView)findViewById(R.id.listView);
-        datasource = new PNNotificationDataSource(this);
-        datasource.open();
-
-
-        List<PNNotification> values = datasource.getAllNotifications();
-        adapter = new ArrayAdapter<PNNotification>(this,
-                android.R.layout.simple_list_item_1, values);
-        notifyList.setAdapter(adapter);
-
         serviceManager = new ServiceManager(this);
         serviceManager.setNotificationIcon(R.drawable.notification);
         serviceManager.startService();
     }
 
-    public ArrayAdapter<PNNotification> getAdapter() {
-        return adapter;
+    public void resetList(){
+        ListView notifyList = (ListView) findViewById(R.id.listView);
+        PNNotificationDataSource datasource = new PNNotificationDataSource(this);
+        datasource.open();
+        if (datasource.getAllNotifications().isEmpty()) {
+            Log.d(LOGTAG, "No Notifications");
+        } else {
+            ArrayList<HashMap<String, ?>> values = datasource.getAllNotifications();
+
+            SimpleAdapter adapter = new SimpleAdapter(this,
+                    values,
+                    R.layout.row,
+                    new String[]{"title", "message"},
+                    new int[]{R.id.textView1, R.id.textView2});
+
+            notifyList.setAdapter(adapter);
+
+            notifyList.smoothScrollToPosition(values.size());
+        }
+        datasource.close();
     }
 
     @Override
@@ -66,9 +98,8 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this, SetPreferenceActivity.class);
-            startActivityForResult(intent, 0);
+            Intent prefs = new Intent(getBaseContext(), SetPreferenceActivity.class);
+            startActivityForResult(prefs, REQUEST_PREFS);
             return true;
         }
 
@@ -110,14 +141,13 @@ public class MainActivity extends AppCompatActivity {
   //  }
   @Override
   protected void onResume() {
-      datasource.open();
-      adapter.notifyDataSetChanged();
       super.onResume();
+      instance = this;
   }
 
     @Override
     protected void onPause() {
-        datasource.close();
         super.onPause();
+        instance = null;
     }
 }
