@@ -85,7 +85,7 @@ public class PNNotificationDataSource {
     public Cursor fetchAllNotifications() {
 
         Cursor mCursor = database.query(MySQLiteHelper.TABLE_NOTIFICATIONS,
-                allColumns, null, null, null, null, null);
+                allColumns, null, null, null, null, MySQLiteHelper.COLUMN_ID + " DESC");
 
         if (mCursor != null) {
             mCursor.moveToFirst();

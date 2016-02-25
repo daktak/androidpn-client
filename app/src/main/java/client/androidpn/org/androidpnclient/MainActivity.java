@@ -24,16 +24,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /* TODO
- * refresh list on notification
  * remove space / trim settings hostname
- * newest on top
  * swipe to dismiss
  * URI / click to load
  * long click / copy text
  * create message
+ * show / get userid via qr code
  * settings / header
  * selectable themes
- * List view layout / title / descr
  * click notification to load app
  */
 
