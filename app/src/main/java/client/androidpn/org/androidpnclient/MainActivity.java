@@ -1,10 +1,12 @@
 package client.androidpn.org.androidpnclient;
 
 import client.androidpn.org.client.LogUtil;
+import client.androidpn.org.client.MySQLiteHelper;
 import client.androidpn.org.client.PNNotificationDataSource;
 import client.androidpn.org.client.ServiceManager;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity instance = null;
     private static final int REQUEST_PREFS = 1;
     private ServiceManager serviceManager;
+    SimpleCursorAdapter dataAdapter;
+    PNNotificationDataSource datasource;
+
     private static final String LOGTAG = LogUtil
             .makeLogTag(MainActivity.class);
 
@@ -60,23 +65,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void resetList(){
-        ListView notifyList = (ListView) findViewById(R.id.listView);
-        PNNotificationDataSource datasource = new PNNotificationDataSource(this);
+        datasource = new PNNotificationDataSource(this);
         datasource.open();
+        ListView notifyList = (ListView) findViewById(R.id.listView);
+
         if (datasource.getAllNotifications().isEmpty()) {
             Log.d(LOGTAG, "No Notifications");
         } else {
-            ArrayList<HashMap<String, ?>> values = datasource.getAllNotifications();
 
-            SimpleAdapter adapter = new SimpleAdapter(this,
-                    values,
-                    R.layout.row,
-                    new String[]{"title", "message"},
-                    new int[]{R.id.textView1, R.id.textView2});
+            // The desired columns to be bound
+            Cursor cursor = datasource.fetchAllNotifications();
 
-            notifyList.setAdapter(adapter);
+            String[] columns = new String[] {
+                    MySQLiteHelper.COLUMN_TITLE,
+                    MySQLiteHelper.COLUMN_MESSAGE
+            };
 
-            notifyList.smoothScrollToPosition(values.size());
+            // the XML defined views which the data will be bound to
+            int[] to = new int[] {
+                    R.id.textView1,
+                    R.id.textView2
+            };
+
+            // create the adapter using the cursor pointing to the desired data
+            //as well as the layout information
+            dataAdapter = new SimpleCursorAdapter(
+                    this, R.layout.row,
+                    cursor,
+                    columns,
+                    to,
+                    0);
+
+            // Assign adapter to ListView
+            dataAdapter.notifyDataSetChanged();
+            notifyList.setAdapter(dataAdapter);
+
         }
         datasource.close();
     }
@@ -143,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onResume() {
       super.onResume();
       instance = this;
+      resetList();
   }
 
     @Override

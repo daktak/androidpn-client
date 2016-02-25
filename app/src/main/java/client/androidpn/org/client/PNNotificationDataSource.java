@@ -82,6 +82,17 @@ public class PNNotificationDataSource {
         return comments;
     }
 
+    public Cursor fetchAllNotifications() {
+
+        Cursor mCursor = database.query(MySQLiteHelper.TABLE_NOTIFICATIONS,
+                allColumns, null, null, null, null, null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
     private PNNotification cursorToComment(Cursor cursor) {
         PNNotification comment = new PNNotification();
         comment.setId(cursor.getLong(0));
