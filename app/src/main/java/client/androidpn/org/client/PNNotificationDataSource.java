@@ -7,19 +7,22 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by daktak on 2/20/16.
  */
 public class PNNotificationDataSource {
+    final static ArrayList<HashMap<String, ?>> notifications = new ArrayList<HashMap<String, ?>>();
 
     // Database fields
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
     private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
             MySQLiteHelper.COLUMN_TITLE,
-            MySQLiteHelper.COLUMN_MESSAGE};
+            MySQLiteHelper.COLUMN_MESSAGE,
+            MySQLiteHelper.COLUMN_URI};
 
     public PNNotificationDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -33,51 +36,74 @@ public class PNNotificationDataSource {
         dbHelper.close();
     }
 
-    public PNNotification createNotification(String title, String message) {
+    public PNNotification createNotification(String title, String message, String uri) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_TITLE, title);
         values.put(MySQLiteHelper.COLUMN_MESSAGE, message);
+        values.put(MySQLiteHelper.COLUMN_URI, uri);
         long insertId = database.insert(MySQLiteHelper.TABLE_NOTIFICATIONS, null,
                 values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_NOTIFICATIONS,
                 allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
-        PNNotification newComment = cursorToComment(cursor);
+        PNNotification newNotification = cursorTonotification(cursor);
         cursor.close();
-        return newComment;
+        return newNotification;
     }
 
-    public void deleteNotification(PNNotification comment) {
-        long id = comment.getId();
-        System.out.println("Comment deleted with id: " + id);
+    public void deleteNotification(PNNotification notification) {
+        long id = notification.getId();
+        System.out.println("Notification deleted with id: " + id);
         database.delete(MySQLiteHelper.TABLE_NOTIFICATIONS, MySQLiteHelper.COLUMN_ID
                 + " = " + id, null);
     }
 
-    public List<PNNotification> getAllNotifications() {
-        List<PNNotification> comments = new ArrayList<PNNotification>();
+    public void deleteAllNotifications() {
+        System.out.println("Delete all notifications");
+        database.delete(MySQLiteHelper.TABLE_NOTIFICATIONS, null, null);
+    }
+    public ArrayList<HashMap<String, ?>> getAllNotifications() {
+        //List<PNNotification> notifications = new ArrayList<PNNotification>();
+        HashMap<String, Object> row;
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_NOTIFICATIONS,
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            PNNotification comment = cursorToComment(cursor);
-            comments.add(comment);
+            PNNotification notification = cursorTonotification(cursor);
+            row  = new HashMap<String, Object>();
+            row.put("title", notification.getTitle());
+            row.put("message", notification.getMessage());
+            row.put("uri", notification.getUri());
+            row.put("uri", "");
+            notifications.add(row);
             cursor.moveToNext();
         }
         // make sure to close the cursor
         cursor.close();
-        return comments;
+        return notifications;
     }
 
-    private PNNotification cursorToComment(Cursor cursor) {
-        PNNotification comment = new PNNotification();
-        comment.setId(cursor.getLong(0));
-        comment.setTitle(cursor.getString(1));
-        comment.setMessage(cursor.getString(2));
-        return comment;
+    public Cursor fetchAllNotifications() {
+
+        Cursor mCursor = database.query(MySQLiteHelper.TABLE_NOTIFICATIONS,
+                allColumns, null, null, null, null, MySQLiteHelper.COLUMN_ID + " DESC");
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
+    public PNNotification cursorTonotification(Cursor cursor) {
+        PNNotification notification = new PNNotification();
+        notification.setId(cursor.getLong(0));
+        notification.setTitle(cursor.getString(1));
+        notification.setMessage(cursor.getString(2));
+        notification.setUri(cursor.getString(3));
+        return notification;
     }
 }
 
