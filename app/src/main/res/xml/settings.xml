@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/pref_host" >
+    <PreferenceCategory android:title="@string/pref_settings" >
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="prefAutostart"
@@ -37,19 +37,22 @@
         android:defaultValue="true"
         android:key="prefSound"
         android:summary="@string/pref_sound"
-        android:title="@string/sound" >
+        android:title="@string/sound"
+        android:dependency="prefNtfy">
     </CheckBoxPreference>
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="prefVibrate"
         android:summary="@string/pref_vibrate"
-        android:title="@string/vibrate" >
+        android:title="@string/vibrate"
+        android:dependency="prefNtfy">
     </CheckBoxPreference>
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="prefToast"
             android:summary="@string/pref_toast"
-            android:title="@string/toast" >
+            android:title="@string/toast"
+            android:dependency="prefNtfy">
         </CheckBoxPreference>
     </PreferenceCategory>
 </PreferenceScreen>

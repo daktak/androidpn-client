@@ -14,7 +14,8 @@
         android:layout_gravity="center_vertical"
         android:gravity="start"
         android:textAlignment="viewStart"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
     <TextView
         android:text="Content and more"
         android:id="@+id/textView2"

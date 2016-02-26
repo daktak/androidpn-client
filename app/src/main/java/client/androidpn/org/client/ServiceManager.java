@@ -87,9 +87,9 @@ public final class ServiceManager {
                 Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         Editor editor = sharedPrefs.edit();
 
-        editor.putString(Constants.API_KEY, apiKey);
+        editor.putString(Constants.API_KEY, apiKey.trim());
         editor.putString(Constants.VERSION, version);
-        editor.putString(Constants.XMPP_HOST, xmppHost);
+        editor.putString(Constants.XMPP_HOST, xmppHost.trim());
         try {
             editor.remove(Constants.SETTINGS_NOTIFICATION_ENABLED);
             editor.remove(Constants.SETTINGS_SOUND_ENABLED);
@@ -104,7 +104,7 @@ public final class ServiceManager {
         editor.putBoolean(Constants.SETTINGS_VIBRATE_ENABLED, prefVibrate);
         editor.putBoolean(Constants.SETTINGS_TOAST_ENABLED, prefToast);
 
-        editor.putInt(Constants.XMPP_PORT, Integer.parseInt(xmppPort));
+        editor.putInt(Constants.XMPP_PORT, Integer.parseInt(xmppPort.trim()));
         editor.putString(Constants.CALLBACK_ACTIVITY_PACKAGE_NAME,
                 callbackActivityPackageName);
         editor.putString(Constants.CALLBACK_ACTIVITY_CLASS_NAME,

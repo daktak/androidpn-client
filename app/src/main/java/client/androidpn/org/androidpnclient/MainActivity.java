@@ -7,6 +7,7 @@ import client.androidpn.org.client.ServiceManager;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,28 +15,21 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /* TODO
- * remove space / trim settings hostname
- * swipe to dismiss
- * URI / click to load
  * long click / copy text
  * create message
  * show / get userid via qr code
  * settings / header
  * selectable themes
- * click notification to load app
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener  {
 
     public static MainActivity instance = null;
     private static final int REQUEST_PREFS = 1;
@@ -56,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         //loadPref();
 
         resetList();
+
         // Start the service
         serviceManager = new ServiceManager(this);
         serviceManager.setNotificationIcon(R.drawable.notification);
@@ -100,8 +95,45 @@ public class MainActivity extends AppCompatActivity {
 
         }
         datasource.close();
+
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        notifyList,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                datasource.open();
+                                for (int position : reverseSortedPositions) {
+                                    datasource.deleteNotification(datasource.cursorTonotification((Cursor) dataAdapter.getItem(position)));
+                                }
+                                dataAdapter.notifyDataSetChanged();
+                                datasource.close();
+                                resetList();
+                            }
+                        });
+        notifyList.setOnTouchListener(touchListener);
+        notifyList.setOnItemClickListener(this);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String uri = datasource.cursorTonotification((Cursor) dataAdapter.getItem(position)).getUri();
+        if (uri != null && uri.length() > 0) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            try {
+                intent.setData(Uri.parse(uri));
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.w(LOGTAG,e.toString());
+            }
+
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -122,6 +154,13 @@ public class MainActivity extends AppCompatActivity {
             Intent prefs = new Intent(getBaseContext(), SetPreferenceActivity.class);
             startActivityForResult(prefs, REQUEST_PREFS);
             return true;
+        }
+        if (id == R.id.action_clear) {
+            datasource.open();
+            datasource.deleteAllNotifications();
+            dataAdapter.notifyDataSetChanged();
+            datasource.close();
+            resetList();
         }
 
         return super.onOptionsItemSelected(item);
@@ -147,19 +186,7 @@ public class MainActivity extends AppCompatActivity {
             serviceManager.startService();
         }
     }
-/*
-    private void loadPref() {
-        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //SharedPreferences sharedPrefs = notificationService.getSharedPreferences();
-//      boolean my_checkbox_preference = mySharedPreferences.getBoolean(Constants.SETTINGS_SOUND_ENABLED, true);
-  //      CheckBoxPreference sound = findViewById(R.xml.settings.SETTINGS_SOUND_ENABLED);
-        //SETTINGS_SOUND_ENABLED.setChecked(my_checkbox_preference);
-/*
-      String my_edittext_preference = mySharedPreferences.getString("edittext_preference", "");
-         prefEditText.setText(my_edittext_preference);
-     */
 
-  //  }
   @Override
   protected void onResume() {
       super.onResume();

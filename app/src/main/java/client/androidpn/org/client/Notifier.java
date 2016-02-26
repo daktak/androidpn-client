@@ -21,6 +21,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
@@ -83,11 +84,37 @@ public class Notifier {
             if (isNotificationVibrateEnabled()) {
                 ntfyDefaults |= Notification.DEFAULT_VIBRATE;
             }
+
+            Intent intent;
+
+            if (uri == null || uri.length() <= 0) {
+                intent = new Intent(context,
+                        NotificationDetailsActivity.class);
+            } else {
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(uri));
+            }
+
+            intent.putExtra(Constants.NOTIFICATION_ID, notificationId);
+            intent.putExtra(Constants.NOTIFICATION_API_KEY, apiKey);
+            intent.putExtra(Constants.NOTIFICATION_TITLE, title);
+            intent.putExtra(Constants.NOTIFICATION_MESSAGE, message);
+            intent.putExtra(Constants.NOTIFICATION_URI, uri);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+                    intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
             Notification notification = new Notification.Builder(context)
                     .setContentTitle(title)
                     .setContentText(message)
                     .setSmallIcon(getNotificationIcon())
                     .setDefaults(ntfyDefaults)
+                    .setContentIntent(contentIntent)
                     //.setLargeIcon(R.drawable.notification)
                     .setWhen(System.currentTimeMillis())
                     .setTicker(message)
@@ -112,21 +139,6 @@ public class Notifier {
             //                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             //            }
 
-            Intent intent = new Intent(context,
-            NotificationDetailsActivity.class);
-            intent.putExtra(Constants.NOTIFICATION_ID, notificationId);
-            intent.putExtra(Constants.NOTIFICATION_API_KEY, apiKey);
-            intent.putExtra(Constants.NOTIFICATION_TITLE, title);
-            intent.putExtra(Constants.NOTIFICATION_MESSAGE, message);
-            intent.putExtra(Constants.NOTIFICATION_URI, uri);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-                    intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             //notification.setLatestEventInfo(context, title, message,
             //        contentIntent);

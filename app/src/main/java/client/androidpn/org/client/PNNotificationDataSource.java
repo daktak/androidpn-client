@@ -14,7 +14,7 @@ import java.util.List;
  * Created by daktak on 2/20/16.
  */
 public class PNNotificationDataSource {
-    final static ArrayList<HashMap<String, ?>> comments = new ArrayList<HashMap<String, ?>>();
+    final static ArrayList<HashMap<String, ?>> notifications = new ArrayList<HashMap<String, ?>>();
 
     // Database fields
     private SQLiteDatabase database;
@@ -47,20 +47,24 @@ public class PNNotificationDataSource {
                 allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
-        PNNotification newComment = cursorToComment(cursor);
+        PNNotification newNotification = cursorTonotification(cursor);
         cursor.close();
-        return newComment;
+        return newNotification;
     }
 
-    public void deleteNotification(PNNotification comment) {
-        long id = comment.getId();
-        System.out.println("Comment deleted with id: " + id);
+    public void deleteNotification(PNNotification notification) {
+        long id = notification.getId();
+        System.out.println("Notification deleted with id: " + id);
         database.delete(MySQLiteHelper.TABLE_NOTIFICATIONS, MySQLiteHelper.COLUMN_ID
                 + " = " + id, null);
     }
 
+    public void deleteAllNotifications() {
+        System.out.println("Delete all notifications");
+        database.delete(MySQLiteHelper.TABLE_NOTIFICATIONS, null, null);
+    }
     public ArrayList<HashMap<String, ?>> getAllNotifications() {
-        //List<PNNotification> comments = new ArrayList<PNNotification>();
+        //List<PNNotification> notifications = new ArrayList<PNNotification>();
         HashMap<String, Object> row;
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_NOTIFICATIONS,
@@ -68,18 +72,18 @@ public class PNNotificationDataSource {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            PNNotification comment = cursorToComment(cursor);
+            PNNotification notification = cursorTonotification(cursor);
             row  = new HashMap<String, Object>();
-            row.put("title", comment.getTitle());
-            row.put("message", comment.getMessage());
-            row.put("uri", comment.getUri());
+            row.put("title", notification.getTitle());
+            row.put("message", notification.getMessage());
+            row.put("uri", notification.getUri());
             row.put("uri", "");
-            comments.add(row);
+            notifications.add(row);
             cursor.moveToNext();
         }
         // make sure to close the cursor
         cursor.close();
-        return comments;
+        return notifications;
     }
 
     public Cursor fetchAllNotifications() {
@@ -93,13 +97,13 @@ public class PNNotificationDataSource {
         return mCursor;
     }
 
-    private PNNotification cursorToComment(Cursor cursor) {
-        PNNotification comment = new PNNotification();
-        comment.setId(cursor.getLong(0));
-        comment.setTitle(cursor.getString(1));
-        comment.setMessage(cursor.getString(2));
-        comment.setUri(cursor.getString(3));
-        return comment;
+    public PNNotification cursorTonotification(Cursor cursor) {
+        PNNotification notification = new PNNotification();
+        notification.setId(cursor.getLong(0));
+        notification.setTitle(cursor.getString(1));
+        notification.setMessage(cursor.getString(2));
+        notification.setUri(cursor.getString(3));
+        return notification;
     }
 }
 
