@@ -6,9 +6,12 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by daktak on 2/20/16.
@@ -22,7 +25,8 @@ public class PNNotificationDataSource {
     private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
             MySQLiteHelper.COLUMN_TITLE,
             MySQLiteHelper.COLUMN_MESSAGE,
-            MySQLiteHelper.COLUMN_URI};
+            MySQLiteHelper.COLUMN_URI,
+            MySQLiteHelper.COLUMN_DTTM};
 
     public PNNotificationDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -41,6 +45,7 @@ public class PNNotificationDataSource {
         values.put(MySQLiteHelper.COLUMN_TITLE, title);
         values.put(MySQLiteHelper.COLUMN_MESSAGE, message);
         values.put(MySQLiteHelper.COLUMN_URI, uri);
+        values.put(MySQLiteHelper.COLUMN_DTTM, getDateTime());
         long insertId = database.insert(MySQLiteHelper.TABLE_NOTIFICATIONS, null,
                 values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_NOTIFICATIONS,
@@ -77,7 +82,7 @@ public class PNNotificationDataSource {
             row.put("title", notification.getTitle());
             row.put("message", notification.getMessage());
             row.put("uri", notification.getUri());
-            row.put("uri", "");
+            row.put("dttm", notification.getDttm());
             notifications.add(row);
             cursor.moveToNext();
         }
@@ -86,8 +91,11 @@ public class PNNotificationDataSource {
         return notifications;
     }
 
-    public Cursor fetchAllNotifications() {
+    public Cursor fetchAllNotifications(String dttmFormat) {
 
+        allColumns[4] = "strftime('"+dttmFormat+"',"+
+                MySQLiteHelper.COLUMN_DTTM+") as "+
+                MySQLiteHelper.COLUMN_DTTM;
         Cursor mCursor = database.query(MySQLiteHelper.TABLE_NOTIFICATIONS,
                 allColumns, null, null, null, null, MySQLiteHelper.COLUMN_ID + " DESC");
 
@@ -103,7 +111,15 @@ public class PNNotificationDataSource {
         notification.setTitle(cursor.getString(1));
         notification.setMessage(cursor.getString(2));
         notification.setUri(cursor.getString(3));
+        notification.setDttm(cursor.getString(4));
         return notification;
+    }
+
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }
 

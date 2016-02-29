@@ -8,6 +8,7 @@ public class PNNotification {
     private String title;
     private String message;
     private String uri;
+    private String dttm;
 
     public long getId() {
         return id;
@@ -25,9 +26,13 @@ public class PNNotification {
         return uri;
     }
 
+    public String getDttm() { return dttm; }
+
     public void setUri(String uri){
         this.uri = uri;
     }
+
+    public void setDttm(String dttm) { this.dttm = dttm; }
 
     public void setTitle(String title) {
         this.title = title;

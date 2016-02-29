@@ -8,6 +8,19 @@
             android:summary="@string/pref_auto"
             android:title="@string/auto" >
         </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefDtTm"
+            android:summary="@string/pref_dttm"
+            android:title="@string/dttm" >
+        </CheckBoxPreference>
+        <EditTextPreference
+            android:title="@string/dttmfrmt"
+            android:summary="@string/pref_dttmfrmt"
+            android:defaultValue="%d/%m/%Y %H:%M"
+            android:dependency="prefDtTm"
+            android:key="prefDttmFormat"/>
+
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_host" >
         <EditTextPreference
