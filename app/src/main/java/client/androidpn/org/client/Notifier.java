@@ -61,7 +61,7 @@ public class Notifier {
     }
 
     public void notify(String notificationId, String apiKey, String title,
-            String message, String uri) {
+        String message, String uri) {
         Log.d(LOGTAG, "notify()...");
 
         Log.d(LOGTAG, "notificationId=" + notificationId);

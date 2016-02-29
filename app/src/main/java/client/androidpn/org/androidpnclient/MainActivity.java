@@ -6,6 +6,7 @@ import client.androidpn.org.client.PNNotificationDataSource;
 import client.androidpn.org.client.ServiceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,10 +24,8 @@ import android.widget.SimpleCursorAdapter;
 
 /* TODO
  * long click / copy text
- * create message
- * show / get userid via qr code
  * settings / header
- * selectable themes
+ * selectable themes?
  */
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener  {
@@ -62,12 +61,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         datasource.open();
         ListView notifyList = (ListView) findViewById(R.id.listView);
 
+        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean prefDtTm = mySharedPreferences.getBoolean("prefDtTm", true);
+        String prefDtTmFrmt = null;
+
         if (datasource.getAllNotifications().isEmpty()) {
             Log.d(LOGTAG, "No Notifications");
         } else {
-
+            if (prefDtTm){
+                prefDtTmFrmt = mySharedPreferences.getString("prefDttmFormat", "%d/%m/%Y %H:%M");
+            }
             // The desired columns to be bound
-            Cursor cursor = datasource.fetchAllNotifications();
+            Cursor cursor = datasource.fetchAllNotifications(prefDtTmFrmt);
 
             String[] columns = new String[] {
                     MySQLiteHelper.COLUMN_TITLE,
@@ -76,10 +81,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             // the XML defined views which the data will be bound to
             int[] to = new int[] {
-                    R.id.textView1,
-                    R.id.textView2
+                    R.id.tvTitle,
+                    R.id.tvMessage
             };
+            if (prefDtTm){
+                columns = new String[] {
+                        MySQLiteHelper.COLUMN_TITLE,
+                        MySQLiteHelper.COLUMN_MESSAGE,
+                        MySQLiteHelper.COLUMN_DTTM
+                };
 
+                // the XML defined views which the data will be bound to
+                 to = new int[] {
+                        R.id.tvTitle,
+                        R.id.tvMessage,
+                        R.id.tvDate
+                };
+            }
             // create the adapter using the cursor pointing to the desired data
             //as well as the layout information
             dataAdapter = new SimpleCursorAdapter(

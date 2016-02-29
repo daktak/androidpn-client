@@ -4,8 +4,17 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/tvDate"
+        android:layout_gravity="right"
+        android:layout_weight="0" />
+
+    <TextView
         android:text="Heading"
-        android:id="@+id/textView1"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:linksClickable="false"
@@ -14,11 +23,10 @@
         android:layout_gravity="center_vertical"
         android:gravity="start"
         android:textAlignment="viewStart"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textAppearance="?android:attr/textAppearanceSearchResultTitle" />
     <TextView
         android:text="Content and more"
-        android:id="@+id/textView2"
+        android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -26,5 +34,6 @@
         android:gravity="end"
         android:textAlignment="viewEnd"
         android:layout_weight="0"
-        android:textSize="14sp" />
+        android:textAppearance="?android:attr/textAppearance" />
+
 </LinearLayout>
