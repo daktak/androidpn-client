@@ -83,20 +83,20 @@ public class Notifier {
             }
 
             Intent intent;
-
+            //launch mainactivity
             if (uri == null || uri.length() <= 0) {
                 intent = new Intent(context,
-                        NotificationDetailsActivity.class);
+                        MainActivity.class);
             } else {
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(uri));
             }
-
+            /*
             intent.putExtra(Constants.NOTIFICATION_ID, notificationId);
             intent.putExtra(Constants.NOTIFICATION_API_KEY, apiKey);
             intent.putExtra(Constants.NOTIFICATION_TITLE, title);
             intent.putExtra(Constants.NOTIFICATION_MESSAGE, message);
-            intent.putExtra(Constants.NOTIFICATION_URI, uri);
+            intent.putExtra(Constants.NOTIFICATION_URI, uri);*/
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

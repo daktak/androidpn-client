@@ -20,13 +20,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-
-/* TODO
- * long click / copy text
- * settings / header
- * selectable themes?
- */
-
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener  {
 
     public static MainActivity instance = null;

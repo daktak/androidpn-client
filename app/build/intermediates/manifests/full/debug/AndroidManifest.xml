@@ -48,7 +48,7 @@
             android:enabled="true"
             android:label="NotificationService" >
             <intent-filter>
-                <action android:name="org.androidpn.client.client.NotificationService.NotificationService" />
+                <action android:name=".SerivceManager.NotificationService" />
             </intent-filter>
         </service>
 
