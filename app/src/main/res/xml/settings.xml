@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
     <PreferenceCategory android:title="@string/pref_settings" >
+        <ListPreference android:title="@string/theme"
+            android:key="theme"
+            android:defaultValue="light"
+            android:entries="@array/themeNames"
+            android:entryValues="@array/themeValues" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="prefAutostart"
@@ -37,6 +43,7 @@
             android:title="@string/xmppport"
             android:summary="@string/pref_xmppport"
             android:defaultValue="5222"
+            android:inputType="number"
             android:key="prefXmppport"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_notify_settings" >

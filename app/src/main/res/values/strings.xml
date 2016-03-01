@@ -27,5 +27,7 @@
     <string name="pref_dttmfrmt">%d/%m/%Y %H:%M</string>
     <string name="dttmfrmt">Date Format</string>
     <string name="display">Display</string>
-
+    <string name="theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
 </resources>

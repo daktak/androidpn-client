@@ -7,10 +7,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text=""
         android:id="@+id/tvDate"
         android:layout_gravity="right"
-        android:layout_weight="0" />
+        android:autoText="false"
+        android:clickable="false"
+        android:enabled="false"
+        android:longClickable="false"
+        android:nestedScrollingEnabled="false"
+        android:singleLine="false"
+        android:textIsSelectable="false" />
 
     <TextView
         android:text="Heading"
