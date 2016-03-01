@@ -33,7 +33,7 @@ MERGED from [com.android.support:support-v4:23.1.1] /home/daktak/StudioProjects/
 	android:allowBackup
 		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:9:9-35
 	android:icon
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:10:9-43
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:10:9-38
 	android:theme
 		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:13:9-40
 activity#org.androidpn.client.MainActivity
@@ -61,7 +61,7 @@ ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManif
 	android:label
 		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:29:13-52
 	android:icon
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:26:13-47
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:26:13-42
 	android:theme
 		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:28:13-44
 	android:name
