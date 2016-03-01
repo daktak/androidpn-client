@@ -24,8 +24,7 @@
         android:theme="@style/AppThemeDark" >
         <activity
             android:name="org.androidpn.client.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppThemeDark.NoActionBar" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,8 +33,7 @@
         </activity>
         <activity
             android:name="org.androidpn.client.SetPreferenceActivity"
-            android:label="@string/action_settings"
-            android:theme="@style/AppThemeDark.NoActionBar" >
+            android:label="@string/action_settings" >
         </activity>
 
         <service
