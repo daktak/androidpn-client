@@ -1,5 +1,5 @@
 <resources>
-
+    <attr name="themeName" format="string"/>
     <!-- Base application theme. -->
     <style name="AppThemeLight" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -17,6 +17,7 @@
     </style>
 
     <style name="AppThemeLight.NoActionBar">
+        <item name="themeName">light</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -26,6 +27,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppThemeDark.NoActionBar">
+        <item name="themeName">dark</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
