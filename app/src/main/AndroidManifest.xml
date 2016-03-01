@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="client.androidpn.org.androidpnclient">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:versionName="0.5.1"
+    android:versionCode="20160301"
+    package="org.androidpn.client">
 
     <application
         android:allowBackup="true"
@@ -29,10 +32,10 @@
             </intent-filter>
         </activity>
         <service android:enabled="true"
-			android:name="client.androidpn.org.client.NotificationService"
+			android:name=".SerivceManager.NotificationService"
 			android:label="NotificationService">
 			<intent-filter>
-				<action android:name="org.androidpn.client.client.NotificationService.NotificationService" />
+				<action android:name=".SerivceManager.NotificationService" />
 			</intent-filter>
 		</service>
         <receiver android:name=".MyBroadcastreceiver">

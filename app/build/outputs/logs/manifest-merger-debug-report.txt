@@ -1,20 +1,24 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:2:1-51:16
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:2:1-54:16
+	xmlns:tools
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:3:5-51
 	xmlns:android
 		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:2:11-69
 	package
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:3:5-51
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:6:5-35
 		INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml
 		INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml
 	android:versionName
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:4:5-32
 		INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml
 		INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml
 	android:versionCode
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:5:5-35
 		INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml
 		INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml
 application
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:5:5-43:23
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:8:5-46:23
 MERGED from [com.android.support:appcompat-v7:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/AndroidManifest.xml:22:5-20
@@ -23,99 +27,99 @@ MERGED from [com.android.support:support-v4:23.1.1] /home/daktak/StudioProjects/
 MERGED from [com.android.support:support-v4:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
 	android:supportsRtl
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:9:9-35
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:12:9-35
 	android:label
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:8:9-41
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:11:9-41
 	android:allowBackup
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:6:9-35
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:9:9-35
 	android:icon
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:7:9-43
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:10:9-43
 	android:theme
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:10:9-40
-activity#client.androidpn.org.androidpnclient.MainActivity
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:11:9-20:20
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:13:9-40
+activity#org.androidpn.client.MainActivity
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:14:9-23:20
 	android:label
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:13:13-45
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:16:13-45
 	android:theme
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:14:13-56
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:17:13-56
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:12:13-41
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:15:13-41
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:15:13-19:29
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:18:13-22:29
 action#android.intent.action.MAIN
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:16:17-69
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:19:17-69
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:16:25-66
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:19:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:18:17-77
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:21:17-77
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:18:27-74
-activity#client.androidpn.org.androidpnclient.SetPreferenceActivity
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:21:9-30:20
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:21:27-74
+activity#org.androidpn.client.SetPreferenceActivity
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:24:9-33:20
 	android:supportsRtl
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:24:13-39
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:27:13-39
 	android:label
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:26:13-52
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:29:13-52
 	android:icon
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:23:13-47
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:26:13-47
 	android:theme
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:25:13-44
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:28:13-44
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:22:13-50
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:25:13-50
 intent-filter#android.intent.category.LAUNCHER
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:27:13-29:29
-service#client.androidpn.org.client.NotificationService
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:31:9-37:13
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:30:13-32:29
+service#org.androidpn.client.SerivceManager.NotificationService
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:34:9-40:13
 	android:label
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:33:4-39
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:36:4-39
 	android:enabled
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:31:18-40
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:34:18-40
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:32:4-66
-intent-filter#org.androidpn.client.client.NotificationService.NotificationService
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:34:4-36:20
-action#org.androidpn.client.client.NotificationService.NotificationService
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:35:5-98
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:35:4-54
+intent-filter#.SerivceManager.NotificationService
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:37:4-39:20
+action#.SerivceManager.NotificationService
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:38:5-66
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:35:13-95
-receiver#client.androidpn.org.androidpnclient.MyBroadcastreceiver
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:38:9-42:20
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:38:13-63
+receiver#org.androidpn.client.MyBroadcastreceiver
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:41:9-45:20
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:38:19-54
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:41:19-54
 intent-filter#android.intent.action.BOOT_COMPLETED
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:39:13-41:29
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:42:13-44:29
 action#android.intent.action.BOOT_COMPLETED
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:40:17-79
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:43:17-79
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:40:25-76
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:43:25-76
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:44:6-76
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:47:6-76
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:44:23-73
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:47:23-73
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:45:9-83
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:48:9-83
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:45:26-80
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:48:26-80
 uses-permission#android.permission.INTERNET
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:46:9-71
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:49:9-71
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:46:26-68
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:49:26-68
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:47:9-80
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:50:9-80
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:47:26-77
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:50:26-77
 uses-permission#android.permission.CHANGE_WIFI_STATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:48:9-80
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:51:9-80
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:48:26-77
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:51:26-77
 uses-permission#android.permission.VIBRATE
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:49:9-70
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:52:9-70
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:49:26-67
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:52:26-67
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:50:9-85
+ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:53:9-85
 	android:name
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:50:26-82
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:53:26-82
 uses-sdk
 INJECTED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:23.1.1] /home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:20:5-43
