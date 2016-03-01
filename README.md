@@ -1,4 +1,6 @@
-# ANDROIDPN-CLIENT README
+# AndroidPN-Client
+
+Get the server from
 http://androidpn.sourceforge.net/
 
 Push Notification Service for Android
