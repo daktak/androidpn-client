@@ -5,7 +5,6 @@ import org.androidpn.client.SerivceManager.ServiceManager;
 import org.androidpn.client.helper.SwipeDismissListViewTouchListener;
 import org.androidpn.client.helper.fixTheme;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        fixTheme.fixTheme(this);
+        boolean reset = fixTheme.fixTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -187,10 +186,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
       /*
        * To make it simple, always re-load Preference setting.
        */
-        fixTheme.fixTheme(this);
-        //if newLaout
-        finish();
-        startActivity(getIntent());
+        boolean reset = fixTheme.fixTheme(this);
+        if (reset) {
+            finish();
+            startActivity(getIntent());
+        }
        // loadPref();
         try {
             serviceManager.stopService();
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
   @Override
   protected void onResume() {
-      fixTheme.fixTheme(this);
+      boolean reset = fixTheme.fixTheme(this);
       super.onResume();
       instance = this;
       resetList();
