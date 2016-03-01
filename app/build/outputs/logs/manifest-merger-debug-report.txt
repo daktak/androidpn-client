@@ -33,7 +33,7 @@ MERGED from [com.android.support:support-v4:23.1.1] /home/daktak/StudioProjects/
 	android:icon
 		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:9:9-38
 	android:theme
-		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:12:9-44
+		ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:12:9-45
 activity#org.androidpn.client.MainActivity
 ADDED from /home/daktak/StudioProjects/AndroidPNClient/app/src/main/AndroidManifest.xml:13:9-20:20
 	android:label
