@@ -40,14 +40,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-        //loadPref();
 
         resetList();
 
+        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean prefAuto = mySharedPreferences.getBoolean("prefAuto", true);
+
         // Start the service
-        serviceManager = new ServiceManager(this);
-        serviceManager.setNotificationIcon(R.drawable.notification);
-        serviceManager.startService();
+        if (serviceManager == null) {
+            if (!prefAuto) {
+                serviceManager = new ServiceManager(this);
+                serviceManager.setNotificationIcon(R.drawable.notification);
+                serviceManager.startService();
+            }
+        }
     }
 
     public void resetList(){
@@ -188,15 +194,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
        */
         boolean reset = fixTheme.fixTheme(this);
         if (reset) {
+            Log.d(LOGTAG,"Theme change");
             finish();
             startActivity(getIntent());
         }
        // loadPref();
-        try {
-            serviceManager.stopService();
-            serviceManager.startService();
-        }
-        catch (Exception e) {
+
+        if (serviceManager != null) {
+
+            if (serviceManager.isNewSettings(this)) {
+                Log.d(LOGTAG, "Restarting sm");
+                serviceManager.stopService();
+                serviceManager.setSettings();
+                serviceManager.startService();
+            }
+        } else {
             serviceManager = new ServiceManager(this);
             serviceManager.setNotificationIcon(R.drawable.notification);
             serviceManager.startService();

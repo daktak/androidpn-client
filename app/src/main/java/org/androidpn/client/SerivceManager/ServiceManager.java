@@ -51,6 +51,24 @@ public final class ServiceManager {
 
     private String callbackActivityClassName;
 
+    public boolean isNewSettings(Context context) {
+        boolean newSettings = false;
+
+        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        String apiKeynew = mySharedPreferences.getString("prefApikey", "1234567890").trim();
+        String xmppHostnew = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim();
+        String xmppPortnew = mySharedPreferences.getString("prefXmppport", "5222").trim();
+
+        if (!(apiKeynew.contentEquals(apiKey) &&
+                xmppHostnew.contentEquals(xmppHost) &&
+                xmppPortnew.contentEquals(xmppPort))) {
+            Log.d(LOGTAG, xmppHost + " : " + xmppHostnew);
+            newSettings = true;
+        }
+        return newSettings;
+    }
+
     public ServiceManager(Context context) {
         this.context = context;
 
@@ -60,6 +78,9 @@ public final class ServiceManager {
             callbackActivityPackageName = callbackActivity.getPackageName();
             callbackActivityClassName = callbackActivity.getClass().getName();
         }
+        setSettings();
+    }
+    public void setSettings() {
 
         //        apiKey = getMetaDataValue("ANDROIDPN_API_KEY");
         //        Log.i(LOGTAG, "apiKey=" + apiKey);
@@ -71,9 +92,9 @@ public final class ServiceManager {
 
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        apiKey = mySharedPreferences.getString("prefApikey", "1234567890");
-        xmppHost = mySharedPreferences.getString("prefXmpphost", "192.168.0.1");
-        xmppPort = mySharedPreferences.getString("prefXmppport", "5222");
+        apiKey = mySharedPreferences.getString("prefApikey", "1234567890").trim();
+        xmppHost = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim();
+        xmppPort = mySharedPreferences.getString("prefXmppport", "5222").trim();
         boolean prefNtfy = mySharedPreferences.getBoolean("prefNtfy",true);
         boolean prefSound = mySharedPreferences.getBoolean("prefSound",true);
         boolean prefVibrate = mySharedPreferences.getBoolean("prefVibrate",true);
@@ -87,9 +108,9 @@ public final class ServiceManager {
                 Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         Editor editor = sharedPrefs.edit();
 
-        editor.putString(Constants.API_KEY, apiKey.trim());
+        editor.putString(Constants.API_KEY, apiKey);
         editor.putString(Constants.VERSION, version);
-        editor.putString(Constants.XMPP_HOST, xmppHost.trim());
+        editor.putString(Constants.XMPP_HOST, xmppHost);
         try {
             editor.remove(Constants.SETTINGS_NOTIFICATION_ENABLED);
             editor.remove(Constants.SETTINGS_SOUND_ENABLED);
@@ -131,8 +152,10 @@ public final class ServiceManager {
 
     public void stopService() {
         Intent intent = NotificationService.getIntent();
+        intent.setClass(context, NotificationService.class);
         context.stopService(intent);
     }
+
 
     //    private String getMetaDataValue(String name, String def) {
     //        String value = getMetaDataValue(name);

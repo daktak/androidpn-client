@@ -5,7 +5,7 @@
     <PreferenceCategory android:title="@string/pref_settings" >
         <ListPreference android:title="@string/theme"
             android:key="theme"
-            android:defaultValue="light"
+            android:defaultValue="dark"
             android:entries="@array/themeNames"
             android:entryValues="@array/themeValues" />
         <CheckBoxPreference
