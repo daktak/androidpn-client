@@ -80,6 +80,7 @@ public final class ServiceManager {
         }
         setSettings();
     }
+
     public void setSettings() {
 
         //        apiKey = getMetaDataValue("ANDROIDPN_API_KEY");
