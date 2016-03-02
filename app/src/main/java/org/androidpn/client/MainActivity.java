@@ -5,7 +5,6 @@ import org.androidpn.client.SerivceManager.ServiceManager;
 import org.androidpn.client.helper.SwipeDismissListViewTouchListener;
 import org.androidpn.client.helper.fixTheme;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -35,20 +34,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        fixTheme.fixTheme(this);
+        boolean reset = fixTheme.fixTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-        //loadPref();
 
         resetList();
 
+        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean prefAuto = mySharedPreferences.getBoolean("prefAuto", true);
+
         // Start the service
-        serviceManager = new ServiceManager(this);
-        serviceManager.setNotificationIcon(R.drawable.notification);
-        serviceManager.startService();
+        if (serviceManager == null) {
+            if (!prefAuto) {
+                serviceManager = new ServiceManager(this);
+                serviceManager.setNotificationIcon(R.drawable.notification);
+                serviceManager.startService();
+            }
+        }
     }
 
     public void resetList(){
@@ -187,16 +192,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
       /*
        * To make it simple, always re-load Preference setting.
        */
-        fixTheme.fixTheme(this);
-        //if newLaout
-        finish();
-        startActivity(getIntent());
-       // loadPref();
-        try {
-            serviceManager.stopService();
-            serviceManager.startService();
+        boolean reset = fixTheme.fixTheme(this);
+        if (reset) {
+            Log.d(LOGTAG,"Theme change");
+            finish();
+            startActivity(getIntent());
         }
-        catch (Exception e) {
+       // loadPref();
+
+        if (serviceManager != null) {
+
+            if (serviceManager.isNewSettings(this)) {
+                Log.d(LOGTAG, "Restarting sm");
+                serviceManager.stopService();
+                serviceManager.setSettings();
+                serviceManager.startService();
+            }
+        } else {
             serviceManager = new ServiceManager(this);
             serviceManager.setNotificationIcon(R.drawable.notification);
             serviceManager.startService();
@@ -205,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
   @Override
   protected void onResume() {
-      fixTheme.fixTheme(this);
+      boolean reset = fixTheme.fixTheme(this);
       super.onResume();
       instance = this;
       resetList();

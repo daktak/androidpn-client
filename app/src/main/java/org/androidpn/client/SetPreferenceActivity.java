@@ -13,7 +13,7 @@ public class SetPreferenceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
-        fixTheme.fixTheme(this);
+        boolean reset = fixTheme.fixTheme(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
