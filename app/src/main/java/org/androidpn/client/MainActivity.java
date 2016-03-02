@@ -2,13 +2,14 @@ package org.androidpn.client;
 
 import org.androidpn.client.SerivceManager.LogUtil;
 import org.androidpn.client.SerivceManager.ServiceManager;
+import org.androidpn.client.helper.EasyPermissions;
 import org.androidpn.client.helper.SwipeDismissListViewTouchListener;
 import org.androidpn.client.helper.fixTheme;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,21 +17,25 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener  {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity
+        implements EasyPermissions.PermissionCallbacks {
+    //  implements AdapterView.OnItemClickListener {
 
     public static MainActivity instance = null;
     private static final int REQUEST_PREFS = 1;
     private ServiceManager serviceManager;
     SimpleCursorAdapter dataAdapter;
     PNNotificationDataSource datasource;
+    private int RC_PHONE_STATE = 1;
 
     private static final String LOGTAG = LogUtil
             .makeLogTag(MainActivity.class);
+    String[] perms = { Manifest.permission.READ_PHONE_STATE };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setSupportActionBar(toolbar);
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
 
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            // Have permissions, do the thing!
+            set();
+        } else {
+            // Ask for both permissions
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_phone_state),
+                    RC_PHONE_STATE, perms);
+        }
+    }
+
+    public void set(){
         resetList();
 
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -135,23 +151,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             }
                         });
         notifyList.setOnTouchListener(touchListener);
-        notifyList.setOnItemClickListener(this);
+        onClickListener ocl = new onClickListener(this, dataAdapter, datasource);
+        notifyList.setOnItemClickListener(ocl);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String uri = datasource.cursorTonotification((Cursor) dataAdapter.getItem(position)).getUri();
-        if (uri != null && uri.length() > 0) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            try {
-                intent.setData(Uri.parse(uri));
-                startActivity(intent);
-            } catch (Exception e) {
-                Log.w(LOGTAG,e.toString());
-            }
-
-        }
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -176,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (id == R.id.action_clear) {
             datasource.open();
             datasource.deleteAllNotifications();
-            dataAdapter.notifyDataSetChanged();
+//            dataAdapter.notifyDataSetChanged();
             datasource.close();
             resetList();
         }
@@ -199,19 +202,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             startActivity(getIntent());
         }
        // loadPref();
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            if (serviceManager != null) {
 
-        if (serviceManager != null) {
-
-            if (serviceManager.isNewSettings(this)) {
-                Log.d(LOGTAG, "Restarting sm");
-                serviceManager.stopService();
-                serviceManager.setSettings();
+                if (serviceManager.isNewSettings(this)) {
+                    Log.d(LOGTAG, "Restarting sm");
+                    serviceManager.stopService();
+                    serviceManager.setSettings();
+                    serviceManager.startService();
+                }
+            } else {
+                serviceManager = new ServiceManager(this);
+                serviceManager.setNotificationIcon(R.drawable.notification);
                 serviceManager.startService();
             }
-        } else {
-            serviceManager = new ServiceManager(this);
-            serviceManager.setNotificationIcon(R.drawable.notification);
-            serviceManager.startService();
         }
     }
 
@@ -220,13 +224,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
       boolean reset = fixTheme.fixTheme(this);
       super.onResume();
       instance = this;
-      resetList();
+      if (EasyPermissions.hasPermissions(this, perms)) {
+          resetList();
+      } else {
+        // Ask for both permissions
+        EasyPermissions.requestPermissions(this, getString(R.string.rationale_phone_state),
+                RC_PHONE_STATE, perms);
+    }
   }
 
     @Override
     protected void onPause() {
         super.onPause();
         instance = null;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> list) {
+        // Some permissions have been granted
+        set();
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> list) {
+        // Some permissions have been denied
+
     }
 
 }
