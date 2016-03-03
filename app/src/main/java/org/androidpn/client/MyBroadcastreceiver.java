@@ -15,11 +15,14 @@ import org.androidpn.client.SerivceManager.ServiceManager;
 public class MyBroadcastreceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean prefAuto = mySharedPreferences.getBoolean("prefAuto", true);
-        if (prefAuto) {
-            Intent startServiceIntent = new Intent(context, ServiceManager.class);
-            context.startService(startServiceIntent);
+        String recievedAction = intent.getAction();
+        if (recievedAction.contentEquals(Intent.ACTION_BOOT_COMPLETED)) {
+            SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            boolean prefAuto = mySharedPreferences.getBoolean("prefAuto", true);
+            if (prefAuto) {
+                Intent startServiceIntent = new Intent(context, ServiceManager.class);
+                context.startService(startServiceIntent);
+            }
         }
     }
 }

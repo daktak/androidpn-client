@@ -16,7 +16,7 @@
 package org.androidpn.client.SerivceManager;
 
 /**
- * Static constants for this package.
+ * Static Constants for this package.
  * 
  * @author Sehwan Noh (devnoh@gmail.com)
  */

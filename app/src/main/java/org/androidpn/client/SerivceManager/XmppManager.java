@@ -272,7 +272,7 @@ public class XmppManager {
         Editor editor = sharedPrefs.edit();
         editor.remove(Constants.XMPP_USERNAME);
         editor.remove(Constants.XMPP_PASSWORD);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -351,9 +351,9 @@ public class XmppManager {
                 PacketListener packetListener = new PacketListener() {
 
                     public void processPacket(Packet packet) {
-                        Log.d("RegisterTask.PacketListener",
+                        Log.d("RegisterTask.PcktLstnr",
                                 "processPacket().....");
-                        Log.d("RegisterTask.PacketListener", "packet="
+                        Log.d("RegisterTask.PcktLstnr", "packet="
                                 + packet.toXML());
 
                         if (packet instanceof IQ) {
@@ -377,7 +377,7 @@ public class XmppManager {
                                         newUsername);
                                 editor.putString(Constants.XMPP_PASSWORD,
                                         newPassword);
-                                editor.commit();
+                                editor.apply();
                                 Log
                                         .i(LOGTAG,
                                                 "Account registered successfully");

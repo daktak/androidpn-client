@@ -131,7 +131,7 @@ public final class ServiceManager {
                 callbackActivityPackageName);
         editor.putString(Constants.CALLBACK_ACTIVITY_CLASS_NAME,
                 callbackActivityClassName);
-        editor.commit();
+        editor.apply();
         // Log.i(LOGTAG, "sharedPrefs=" + sharedPrefs.toString());
     }
 
@@ -230,7 +230,7 @@ public final class ServiceManager {
     public void setNotificationIcon(int iconId) {
         Editor editor = sharedPrefs.edit();
         editor.putInt(Constants.NOTIFICATION_ICON, iconId);
-        editor.commit();
+        editor.apply();
     }
 
     //public static void viewNotificationSettings(Context context) {

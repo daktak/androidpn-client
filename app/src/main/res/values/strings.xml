@@ -2,7 +2,6 @@
     <string name="app_name">AndroidPN Client</string>
     <string name="action_settings">Settings</string>
     <string name="action_clear">Clear All</string>
-    <string name="hello">Hello Android, DemoAppActivity!</string>
     <string name="pref_notify_settings">Notification Settings</string>
     <string name="pref_host">Host Settings</string>
     <string name="sound">Sound</string>

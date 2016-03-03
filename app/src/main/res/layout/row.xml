@@ -8,12 +8,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/tvDate"
-        android:layout_gravity="right"
-        android:autoText="false"
+        android:layout_gravity="end"
         android:clickable="false"
         android:enabled="false"
         android:longClickable="false"
-        android:nestedScrollingEnabled="false"
         android:singleLine="false"
         android:textIsSelectable="false" />
 
