@@ -122,8 +122,9 @@ public class NotificationService extends Service {
     }
 
     @Override
-    public void onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(LOGTAG, "onStart()...");
+        return START_NOT_STICKY;
     }
 
     @Override
