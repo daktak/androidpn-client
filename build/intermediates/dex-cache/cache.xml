@@ -1,2 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d4c936aa8c7d2522c82e3f1829c791d9e367f009">
+        <dex dex="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.2.0_1cbd275ea40ab1c76f55c6c4923dd69183b1c9a9.jar" />
+    </item>
+    <item
+        jar="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6e3578f92f7462d1a935a1d36173e3bdd1234976">
+        <dex dex="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.2.0_c5b0354fad3e094fa1a0adf89b579c712a08da5f.jar" />
+    </item>
+    <item
+        jar="/home/daktak/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.0/support-annotations-23.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c5bf571bb10462bd90e5419ade67793f71acbc87">
+        <dex dex="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.0_0dbbbe1edec190ef1df84b0c289645272462ac4e.jar" />
+    </item>
+    <item
+        jar="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e5f32fa48a3eb2de0c987025c11b6e3864b634d9">
+        <dex dex="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.2.0_84386d1fe42e8b1c34a2e0bf73ae5e90febc0278.jar" />
+    </item>
+    <item
+        jar="/home/daktak/StudioProjects/AndroidPNClient/app/src/main/lib/asmack.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="fe03343aa1bcebe304b71c2c4ca64e447b86d565">
+        <dex dex="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/pre-dexed/debug/asmack_bbe08a81376784b3e0ea3c3438c47e9002869273.jar" />
+    </item>
+    <item
+        jar="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="292a9fa091757208efa65e77eef63088247e51f3">
+        <dex dex="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.2.0_c9c0cc1786b08dfc07e0c007636250a9b639924a.jar" />
+    </item>
+    <item
+        jar="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8c108c22c99e794eff255bb34d2a461200c4cbb0">
+        <dex dex="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.2.0_b6efc04e9f31237ec16e94b7fbe20693c7763b77.jar" />
+    </item>
+    <item
+        jar="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/jars/libs/internal_impl-23.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6e239441500605809818997dd63b62a947195f8c">
+        <dex dex="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.0_6dff10b5c89c7f80caec4247d9e0d7e6a5958c3a.jar" />
+    </item>
+    <item
+        jar="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/exploded-aar/com.android.support/design/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1aa5b025efe97f5006f5be16d6ca67c6c3c0c0d8">
+        <dex dex="/home/daktak/StudioProjects/AndroidPNClient/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.2.0_944012e1c1a0175b725c0324eb58a6feb6c0c08f.jar" />
+    </item>
+
+</items>

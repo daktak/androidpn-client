@@ -94,7 +94,7 @@ public class NotificationService extends Service {
         // Log.d(LOGTAG, "deviceId=" + deviceId);
         Editor editor = sharedPrefs.edit();
         editor.putString(Constants.DEVICE_ID, deviceId);
-        editor.commit();
+        editor.apply();
 
         // If running on an emulator
         if (deviceId == null || deviceId.trim().length() == 0
@@ -107,7 +107,7 @@ public class NotificationService extends Service {
                         (new Random(System.currentTimeMillis())).nextLong())
                         .toString();
                 editor.putString(Constants.EMULATOR_DEVICE_ID, deviceId);
-                editor.commit();
+                editor.apply();
             }
         }
         Log.d(LOGTAG, "deviceId=" + deviceId);
