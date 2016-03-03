@@ -122,7 +122,7 @@ public class NotificationService extends Service {
     }
 
     @Override
-    public void onStart(Intent intent, int startId) {
+    public void onStartCommand(Intent intent, int flags, int startId) {
         Log.d(LOGTAG, "onStart()...");
     }
 
