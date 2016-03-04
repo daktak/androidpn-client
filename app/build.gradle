@@ -31,5 +31,6 @@ dependencies {
 android {
     lintOptions {
     	disable 'InnerclassSeparator','GoogleAppIndexingWarning'
-	}
+	checkReleaseBuilds false
+    }
 }
