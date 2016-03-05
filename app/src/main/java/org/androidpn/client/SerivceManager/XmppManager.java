@@ -36,8 +36,13 @@ import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.Registration;
 import org.jivesoftware.smack.provider.ProviderManager;
 
+//import org.igniterealtime.smack.ConnectionListener;
+
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
@@ -390,13 +395,15 @@ public class XmppManager {
                 connection.addPacketListener(packetListener, packetFilter);
 
                 registration.setType(IQ.Type.SET);
-                // registration.setTo(xmppHost);
-                // Map<String, String> attributes = new HashMap<String, String>();
-                // attributes.put("username", rUsername);
-                // attributes.put("password", rPassword);
-                // registration.setAttributes(attributes);
-                registration.addAttribute("username", newUsername);
-                registration.addAttribute("password", newPassword);
+                registration.setTo(xmppHost);
+                Map<String, String> attributes = new HashMap<String, String>();
+                attributes.put("username", newUsername);
+                attributes.put("password", newPassword);
+                registration.setAttributes(attributes);
+                //registration.setAttributes();
+
+                //registration.addAttribute("username", newUsername);
+                //registration.addAttribute("password", newPassword);
                 connection.sendPacket(registration);
 
             } else {

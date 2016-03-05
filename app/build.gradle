@@ -20,17 +20,37 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+    mavenCentral()
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.0'
-    compile files('src/main/lib/asmack.jar')
+    //compile files('src/main/lib/asmack.jar')
+    compile "jivesoftware:smack:3.2.1"
+    //TODO
+    //compile "org.igniterealtime.smack:smack-java7:4.1.0"
+    // Optional for XMPPTCPConnection
+    //compile "org.igniterealtime.smack:smack-tcp:4.1.0"
+    // Optional for XMPP-IM (RFC 6121) support (Roster, Threaded Chats, …)
+    //compile "org.igniterealtime.smack:smack-im:4.1.0"
+    // Optional for XMPP extensions support
+    //compile "org.igniterealtime.smack:smack-extensions:4.1.0"
+    //compile "org.igniterealtime.smack:smack-android-extensions:4.1.0"
+    //compile "org.igniterealtime.smack:smack-tcp:4.1.0"
+    //compile "org.igniterealtime.smack:smack-experimental:4.1.0"
+
 }
 
 android {
     lintOptions {
-    	disable 'InnerclassSeparator','GoogleAppIndexingWarning'
+    	disable 'InnerclassSeparator','GoogleAppIndexingWarning','InvalidPackage'
 	checkReleaseBuilds false
     }
 }
