@@ -15,22 +15,27 @@
  */
 package org.androidpn.client.SerivceManager;
 
+import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.provider.IQProvider;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /** 
  * This class parses incoming IQ packets to NotificationIQ objects.
  *
  * @author Sehwan Noh (devnoh@gmail.com)
  */
-public class NotificationIQProvider implements IQProvider {
+public class NotificationIQProvider extends IQProvider {
 
     public NotificationIQProvider() {
     }
 
     @Override
-    public IQ parseIQ(XmlPullParser parser) throws Exception {
+    public IQ parse(XmlPullParser parser, int initialDepth) throws XmlPullParserException, IOException,
+            SmackException {
 
         NotificationIQ notification = new NotificationIQ();
         for (boolean done = false; !done;) {

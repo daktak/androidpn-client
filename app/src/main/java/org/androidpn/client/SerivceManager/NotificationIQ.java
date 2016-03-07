@@ -34,19 +34,23 @@ public class NotificationIQ extends IQ {
 
     private String uri;
 
-    public NotificationIQ() {
+    protected NotificationIQ() {
+        super("query","urn:xmpp:mam:0");
     }
 
     @Override
-    public String getChildElementXML() {
-        StringBuilder buf = new StringBuilder();
-        buf.append("<").append("notification").append(" xmlns=\"").append(
-                "androidpn:iq:notification").append("\">");
-        if (id != null) {
-            buf.append("<id>").append(id).append("</id>");
-        }
-        buf.append("</").append("notification").append("> ");
-        return buf.toString();
+    protected IQChildElementXmlStringBuilder getIQChildElementBuilder(IQChildElementXmlStringBuilder xml) {
+        xml.rightAngleBracket();
+        xml.element("id", id);
+        xml.rightAngleBracket();
+        xml.element("apikey", apiKey);
+        xml.rightAngleBracket();
+        xml.element("title", title);
+        xml.rightAngleBracket();
+        xml.element("message", message);
+        xml.rightAngleBracket();
+        xml.element("uri", uri);
+        return xml;
     }
 
     public String getId() {

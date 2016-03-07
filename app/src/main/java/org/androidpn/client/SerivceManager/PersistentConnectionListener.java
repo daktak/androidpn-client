@@ -18,6 +18,8 @@ package org.androidpn.client.SerivceManager;
 import android.util.Log;
 
 import org.jivesoftware.smack.ConnectionListener;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 
 /** 
  * A listener class for monitoring connection closing and reconnection events.
@@ -38,6 +40,16 @@ public class PersistentConnectionListener implements ConnectionListener {
     @Override
     public void connectionClosed() {
         Log.d(LOGTAG, "connectionClosed()...");
+    }
+
+    @Override
+    public void connected(XMPPConnection connection) {
+        Log.d(LOGTAG, "connected()...");
+    }
+
+    @Override
+    public void authenticated(XMPPConnection connection, boolean authed) {
+        Log.d(LOGTAG, "authenticated()...");
     }
 
     @Override

@@ -21,24 +21,23 @@ import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.util.Log;
 
-import org.jivesoftware.smack.ConnectionConfiguration;
-import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
+
 import org.jivesoftware.smack.ConnectionListener;
-import org.jivesoftware.smack.PacketListener;
-import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.StanzaListener;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.filter.AndFilter;
-import org.jivesoftware.smack.filter.PacketFilter;
-import org.jivesoftware.smack.filter.PacketIDFilter;
-import org.jivesoftware.smack.filter.PacketTypeFilter;
+import org.jivesoftware.smack.filter.StanzaFilter;
+import org.jivesoftware.smack.filter.StanzaIdFilter;
+import org.jivesoftware.smack.filter.StanzaTypeFilter;
 import org.jivesoftware.smack.packet.IQ;
-import org.jivesoftware.smack.packet.Packet;
-import org.jivesoftware.smack.packet.Registration;
+import org.jivesoftware.smack.packet.Stanza;
+import org.jivesoftware.smack.tcp.XMPPTCPConnection;
+import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
+import org.jivesoftware.smackx.iqregister.packet.Registration;
 import org.jivesoftware.smack.provider.ProviderManager;
 
-//import org.igniterealtime.smack.ConnectionListener;
-
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +68,7 @@ public class XmppManager {
 
     private int xmppPort;
 
-    private XMPPConnection connection;
+    private XMPPTCPConnection connection;
 
     private String username;
 
@@ -77,11 +76,11 @@ public class XmppManager {
 
     private ConnectionListener connectionListener;
 
-    private PacketListener notificationPacketListener;
+    private StanzaListener notificationPacketListener;
 
     private Handler handler;
 
-    private List<Runnable> taskList;
+    private final List<Runnable> taskList;
 
     private boolean running = false;
 
@@ -131,7 +130,7 @@ public class XmppManager {
             public void run() {
                 if (xmppManager.isConnected()) {
                     Log.d(LOGTAG, "terminatePersistentConnection()... run()");
-                    xmppManager.getConnection().removePacketListener(
+                    xmppManager.getConnection().removeAsyncStanzaListener(
                             xmppManager.getNotificationPacketListener());
                     xmppManager.getConnection().disconnect();
                 }
@@ -142,11 +141,11 @@ public class XmppManager {
         addTask(runnable);
     }
 
-    public XMPPConnection getConnection() {
+    public XMPPTCPConnection getConnection() {
         return connection;
     }
 
-    public void setConnection(XMPPConnection connection) {
+    public void setConnection(XMPPTCPConnection connection) {
         this.connection = connection;
     }
 
@@ -170,7 +169,7 @@ public class XmppManager {
         return connectionListener;
     }
 
-    public PacketListener getNotificationPacketListener() {
+    public StanzaListener getNotificationPacketListener() {
         return notificationPacketListener;
     }
 
@@ -296,14 +295,17 @@ public class XmppManager {
 
             if (!xmppManager.isConnected()) {
                 // Create the configuration for this new connection
-                ConnectionConfiguration connConfig = new ConnectionConfiguration(
-                        xmppHost, xmppPort);
+                XMPPTCPConnectionConfiguration.Builder connConfig = XMPPTCPConnectionConfiguration.builder();
+                //ConnectionConfiguration connConfig = new ConnectionConfiguration(
+                //        xmppHost, xmppPort);
                 // connConfig.setSecurityMode(SecurityMode.disabled);
+                /*
                 connConfig.setSecurityMode(SecurityMode.required);
                 connConfig.setSASLAuthenticationEnabled(false);
                 connConfig.setCompressionEnabled(false);
-
-                XMPPConnection connection = new XMPPConnection(connConfig);
+                */
+                //connConfig.setUsernameAndPassword(xmppHost, xmppPort);
+                XMPPTCPConnection connection = new XMPPTCPConnection(connConfig.build());
                 xmppManager.setConnection(connection);
 
                 try {
@@ -312,12 +314,16 @@ public class XmppManager {
                     Log.i(LOGTAG, "XMPP connected successfully");
 
                     // packet provider
-                    ProviderManager.getInstance().addIQProvider("notification",
+                    ProviderManager.addIQProvider("notification",
                             "androidpn:iq:notification",
                             new NotificationIQProvider());
 
                 } catch (XMPPException e) {
                     Log.e(LOGTAG, "XMPP connection failed", e);
+                } catch (SmackException e) {
+                    Log.e(LOGTAG, "XMPP smack failed", e);
+                } catch (IOException e) {
+                    Log.e(LOGTAG, "XMPP io connection failed", e);
                 }
 
                 xmppManager.runTask();
@@ -347,15 +353,25 @@ public class XmppManager {
                 final String newUsername = newRandomUUID();
                 final String newPassword = newRandomUUID();
 
-                Registration registration = new Registration();
 
-                PacketFilter packetFilter = new AndFilter(new PacketIDFilter(
-                        registration.getPacketID()), new PacketTypeFilter(
+                Map<String, String> attributes = new HashMap<String, String>();
+                attributes.put("username", newUsername);
+                attributes.put("password", newPassword);
+                //registration.setAttributes(attributes);
+                //registration.setAttributes();
+
+                //registration.addAttribute("username", newUsername);
+                //registration.addAttribute("password", newPassword);
+                Registration registration = new Registration(attributes);
+                registration.setType(IQ.Type.set);
+                registration.setTo(xmppHost);
+                StanzaFilter packetFilter = new AndFilter(new StanzaIdFilter(
+                        registration.getStanzaId()), new StanzaTypeFilter(
                         IQ.class));
 
-                PacketListener packetListener = new PacketListener() {
+                StanzaListener packetListener = new StanzaListener() {
 
-                    public void processPacket(Packet packet) {
+                    public void processPacket(Stanza packet) {
                         Log.d("RegisterTask.PcktLstnr",
                                 "processPacket().....");
                         Log.d("RegisterTask.PcktLstnr", "packet="
@@ -363,7 +379,7 @@ public class XmppManager {
 
                         if (packet instanceof IQ) {
                             IQ response = (IQ) packet;
-                            if (response.getType() == IQ.Type.ERROR) {
+                            if (response.getType() == IQ.Type.error) {
                                 if (!response.getError().toString().contains(
                                         "409")) {
                                     Log.e(LOGTAG,
@@ -371,7 +387,7 @@ public class XmppManager {
                                                     + response.getError()
                                                             .getCondition());
                                 }
-                            } else if (response.getType() == IQ.Type.RESULT) {
+                            } else if (response.getType() == IQ.Type.result) {
                                 xmppManager.setUsername(newUsername);
                                 xmppManager.setPassword(newPassword);
                                 Log.d(LOGTAG, "username=" + newUsername);
@@ -392,19 +408,14 @@ public class XmppManager {
                     }
                 };
 
-                connection.addPacketListener(packetListener, packetFilter);
+                connection.addAsyncStanzaListener(packetListener, packetFilter);
 
-                registration.setType(IQ.Type.SET);
-                registration.setTo(xmppHost);
-                Map<String, String> attributes = new HashMap<String, String>();
-                attributes.put("username", newUsername);
-                attributes.put("password", newPassword);
-                registration.setAttributes(attributes);
-                //registration.setAttributes();
 
-                //registration.addAttribute("username", newUsername);
-                //registration.addAttribute("password", newPassword);
-                connection.sendPacket(registration);
+                try {
+                    connection.sendStanza(registration);
+                } catch (SmackException.NotConnectedException e) {
+                    Log.e(LOGTAG, "XMPP failed to send ", e);
+                }
 
             } else {
                 Log.i(LOGTAG, "Account registered already");
@@ -444,12 +455,12 @@ public class XmppManager {
                     }
 
                     // packet filter
-                    PacketFilter packetFilter = new PacketTypeFilter(
+                    StanzaFilter packetFilter = new StanzaTypeFilter(
                             NotificationIQ.class);
                     // packet listener
-                    PacketListener packetListener = xmppManager
+                    StanzaListener packetListener = xmppManager
                             .getNotificationPacketListener();
-                    connection.addPacketListener(packetListener, packetFilter);
+                    connection.addAsyncStanzaListener(packetListener, packetFilter);
 
                     xmppManager.runTask();
 

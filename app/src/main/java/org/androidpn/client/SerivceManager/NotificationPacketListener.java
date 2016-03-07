@@ -18,15 +18,15 @@ package org.androidpn.client.SerivceManager;
 import android.content.Intent;
 import android.util.Log;
 
-import org.jivesoftware.smack.PacketListener;
-import org.jivesoftware.smack.packet.Packet;
+import org.jivesoftware.smack.StanzaListener;
+import org.jivesoftware.smack.packet.Stanza;
 
 /** 
  * This class notifies the receiver of incoming notifcation packets asynchronously.  
  *
  * @author Sehwan Noh (devnoh@gmail.com)
  */
-public class NotificationPacketListener implements PacketListener {
+public class NotificationPacketListener implements StanzaListener {
 
     private static final String LOGTAG = LogUtil
             .makeLogTag(NotificationPacketListener.class);
@@ -38,14 +38,14 @@ public class NotificationPacketListener implements PacketListener {
     }
 
     @Override
-    public void processPacket(Packet packet) {
+    public void processPacket(Stanza packet) {
         Log.d(LOGTAG, "NotificationPacketListener.processPacket()...");
         Log.d(LOGTAG, "packet.toXML()=" + packet.toXML());
 
         if (packet instanceof NotificationIQ) {
             NotificationIQ notification = (NotificationIQ) packet;
 
-            if (notification.getChildElementXML().contains(
+            if (notification.getChildElementXML().toString().contains(
                     "androidpn:iq:notification")) {
                 String notificationId = notification.getId();
                 String notificationApiKey = notification.getApiKey();
