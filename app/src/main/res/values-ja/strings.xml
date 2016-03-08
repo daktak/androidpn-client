@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">AndroidPN クライアント</string>
+    <string name="action_settings">設定</string>
+    <string name="action_clear">すべてクリア</string>
+    <string name="pref_notify_settings">通知設定</string>
+    <string name="pref_host">ホスト設定</string>
+    <string name="sound">サウンド</string>
+    <string name="pref_sound">通知のサウンドを再生します</string>
+    <string name="notify">通知は有効です</string>
+    <string name="pref_notify">プッシュメッセージを受信します</string>
+    <string name="vibrate">バイブレート</string>
+    <string name="pref_vibrate">通知でバイブレートします</string>
+    <string name="apikey">API キー</string>
+    <string name="pref_apikey">サーバーの API キー</string>
+    <string name="xmpphost">XMPP ホスト</string>
+    <string name="pref_xmpphost">サーバー名または IP</string>
+    <string name="xmppport">XMPP ポート</string>
+    <string name="pref_xmppport">ポート</string>
+    <string name="toast">Toast</string>
+    <string name="pref_toast">ポップアップ通知</string>
+    <string name="pref_auto">起動時にサービスを実行します</string>
+    <string name="auto">自動起動</string>
+    <string name="dttm">日時を表示</string>
+    <string name="pref_dttm">それぞれの通知の日時を表示します</string>
+    <string name="pref_dttmfrmt">%d/%m/%Y %H:%M</string>
+    <string name="dttmfrmt">日付形式</string>
+    <string name="display">表示</string>
+    <string name="theme">テーマ</string>
+    <string name="theme_light">ライト</string>
+    <string name="theme_dark">ダーク</string>
+    <string name="rationale_phone_state">電話の状態は、通知をリスニングするために必要です。</string>
+</resources>
