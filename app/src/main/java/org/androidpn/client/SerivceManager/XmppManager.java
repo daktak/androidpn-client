@@ -293,7 +293,7 @@ public class XmppManager {
 
         public void run() {
             Log.i(LOGTAG, "ConnectTask.run()...");
-
+            boolean connected = false;
             if (!xmppManager.isConnected()) {
                 // Create the configuration for this new connection
                 ConnectionConfiguration connConfig = new ConnectionConfiguration(
@@ -315,12 +315,15 @@ public class XmppManager {
                     ProviderManager.getInstance().addIQProvider("notification",
                             "androidpn:iq:notification",
                             new NotificationIQProvider());
+                    connected = true;
 
                 } catch (XMPPException e) {
                     Log.e(LOGTAG, "XMPP connection failed", e);
                 }
 
-                xmppManager.runTask();
+                if (connected) {
+                    xmppManager.runTask();
+                }
 
             } else {
                 Log.i(LOGTAG, "XMPP connected already");

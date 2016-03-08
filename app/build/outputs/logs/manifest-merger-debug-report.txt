@@ -42,7 +42,7 @@ ADDED from /home/daktak/StudioProjects/androidpn-client/app/src/main/AndroidMani
 	android:name
 		ADDED from /home/daktak/StudioProjects/androidpn-client/app/src/main/AndroidManifest.xml:11:26-82
 application
-ADDED from /home/daktak/StudioProjects/androidpn-client/app/src/main/AndroidManifest.xml:13:5-45:23
+ADDED from /home/daktak/StudioProjects/androidpn-client/app/src/main/AndroidManifest.xml:13:5-45:19
 MERGED from [com.android.support:appcompat-v7:23.2.0] /home/daktak/StudioProjects/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-v4:23.2.0] /home/daktak/StudioProjects/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:animated-vector-drawable:23.2.0] /home/daktak/StudioProjects/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.0/AndroidManifest.xml:7:5-20

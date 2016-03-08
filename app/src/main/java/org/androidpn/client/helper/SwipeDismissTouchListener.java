@@ -237,6 +237,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
                     // TODO: use an ease-out interpolator or such
                     mView.setAlpha(Math.max(0f, Math.min(1f,
                             1f - 2f * Math.abs(deltaX) / mViewWidth)));
+                    view.performClick();
                     return true;
                 }
                 break;

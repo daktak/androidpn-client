@@ -5,10 +5,10 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId 'org.androidpn.client'
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 23
-        versionCode 20160303
-        versionName "0.5.6"
+        versionCode 20160308
+        versionName "0.5.7"
     }
     buildTypes {
         release {
@@ -32,10 +32,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.0'
-    //compile files('src/main/lib/asmack.jar')
-    compile "jivesoftware:smack:3.2.1"
+    compile "org.igniterealtime.smack:smack:3.2.1"
+
     //TODO
-    //compile "org.igniterealtime.smack:smack-java7:4.1.0"
+    //compile "org.igniterealtime.smack:smack-android:4.1.0"
     // Optional for XMPPTCPConnection
     //compile "org.igniterealtime.smack:smack-tcp:4.1.0"
     // Optional for XMPP-IM (RFC 6121) support (Roster, Threaded Chats, …)
@@ -43,14 +43,13 @@ dependencies {
     // Optional for XMPP extensions support
     //compile "org.igniterealtime.smack:smack-extensions:4.1.0"
     //compile "org.igniterealtime.smack:smack-android-extensions:4.1.0"
-    //compile "org.igniterealtime.smack:smack-tcp:4.1.0"
     //compile "org.igniterealtime.smack:smack-experimental:4.1.0"
 
 }
 
 android {
     lintOptions {
-    	disable 'InnerclassSeparator','GoogleAppIndexingWarning','InvalidPackage'
+    	disable 'InnerclassSeparator','GoogleAppIndexingWarning','InvalidPackage','IconDensities'
 	checkReleaseBuilds false
     }
 }

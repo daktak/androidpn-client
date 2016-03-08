@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final String LOGTAG = LogUtil
             .makeLogTag(MainActivity.class);
-    String[] perms = { Manifest.permission.READ_PHONE_STATE };
+    String[] perms = {Manifest.permission.READ_PHONE_STATE};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void set(){
+    public void set() {
         resetList();
 
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void resetList(){
+    public void resetList() {
         datasource = new PNNotificationDataSource(this);
         datasource.open();
         ListView notifyList = (ListView) findViewById(R.id.listView);
@@ -84,31 +85,31 @@ public class MainActivity extends AppCompatActivity
         if (datasource.getAllNotifications().isEmpty()) {
             Log.d(LOGTAG, "No Notifications");
         } else {
-            if (prefDtTm){
+            if (prefDtTm) {
                 prefDtTmFrmt = mySharedPreferences.getString("prefDttmFormat", "%d/%m/%Y %H:%M");
             }
             // The desired columns to be bound
             Cursor cursor = datasource.fetchAllNotifications(prefDtTmFrmt);
 
-            String[] columns = new String[] {
+            String[] columns = new String[]{
                     MySQLiteHelper.COLUMN_TITLE,
                     MySQLiteHelper.COLUMN_MESSAGE
             };
 
             // the XML defined views which the data will be bound to
-            int[] to = new int[] {
+            int[] to = new int[]{
                     R.id.tvTitle,
                     R.id.tvMessage
             };
-            if (prefDtTm){
-                columns = new String[] {
+            if (prefDtTm) {
+                columns = new String[]{
                         MySQLiteHelper.COLUMN_TITLE,
                         MySQLiteHelper.COLUMN_MESSAGE,
                         MySQLiteHelper.COLUMN_DTTM
                 };
 
                 // the XML defined views which the data will be bound to
-                 to = new int[] {
+                to = new int[]{
                         R.id.tvTitle,
                         R.id.tvMessage,
                         R.id.tvDate
@@ -197,11 +198,11 @@ public class MainActivity extends AppCompatActivity
        */
         boolean reset = fixTheme.fixTheme(this);
         if (reset) {
-            Log.d(LOGTAG,"Theme change");
+            Log.d(LOGTAG, "Theme change");
             finish();
             startActivity(getIntent());
         }
-       // loadPref();
+        // loadPref();
         if (EasyPermissions.hasPermissions(this, perms)) {
             if (serviceManager != null) {
 
@@ -219,26 +220,25 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-  @Override
-  protected void onResume() {
-      boolean reset = fixTheme.fixTheme(this);
-      super.onResume();
-      instance = this;
-      if (EasyPermissions.hasPermissions(this, perms)) {
-          resetList();
-      } else {
-        // Ask for both permissions
-        EasyPermissions.requestPermissions(this, getString(R.string.rationale_phone_state),
-                RC_PHONE_STATE, perms);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        boolean reset = fixTheme.fixTheme(this);
+        instance = this;
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            resetList();
+        } else {
+            // Ask for both permissions
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_phone_state),
+                    RC_PHONE_STATE, perms);
+        }
     }
-  }
 
     @Override
     protected void onPause() {
         super.onPause();
         instance = null;
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <PreferenceCategory android:title="@string/pref_settings" >
-        <ListPreference android:title="@string/theme"
-            android:key="theme"
-            android:defaultValue="dark"
-            android:entries="@array/themeNames"
-            android:entryValues="@array/themeValues" />
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="prefAutostart"
-            android:summary="@string/pref_auto"
-            android:title="@string/auto" >
-        </CheckBoxPreference>
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="prefDtTm"
-            android:summary="@string/pref_dttm"
-            android:title="@string/dttm" >
-        </CheckBoxPreference>
-        <EditTextPreference
-            android:title="@string/dttmfrmt"
-            android:summary="@string/pref_dttmfrmt"
-            android:defaultValue="%d/%m/%Y %H:%M"
-            android:dependency="prefDtTm"
-            android:key="prefDttmFormat"/>
-
-    </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_host" >
         <EditTextPreference
             android:title="@string/apikey"
@@ -45,6 +18,30 @@
             android:defaultValue="5222"
             android:inputType="number"
             android:key="prefXmppport"/>
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefAutostart"
+            android:summary="@string/pref_auto"
+            android:title="@string/auto" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/display" >
+        <ListPreference android:title="@string/theme"
+            android:key="theme"
+            android:defaultValue="dark"
+            android:entries="@array/themeNames"
+            android:entryValues="@array/themeValues" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefDtTm"
+            android:summary="@string/pref_dttm"
+            android:title="@string/dttm" >
+        </CheckBoxPreference>
+        <EditTextPreference
+            android:title="@string/dttmfrmt"
+            android:summary="@string/pref_dttmfrmt"
+            android:defaultValue="%d/%m/%Y %H:%M"
+            android:dependency="prefDtTm"
+            android:key="prefDttmFormat"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_notify_settings" >
     <CheckBoxPreference
