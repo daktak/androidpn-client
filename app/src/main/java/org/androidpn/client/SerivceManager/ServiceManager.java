@@ -57,7 +57,7 @@ public final class ServiceManager {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         String apiKeynew = mySharedPreferences.getString("prefApikey", "1234567890").trim();
-        String xmppHostnew = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim();
+        String xmppHostnew = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim().toLowerCase();
         String xmppPortnew = mySharedPreferences.getString("prefXmppport", "5222").trim();
 
         if (!(apiKeynew.contentEquals(apiKey) &&
@@ -94,7 +94,7 @@ public final class ServiceManager {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         apiKey = mySharedPreferences.getString("prefApikey", "1234567890").trim();
-        xmppHost = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim();
+        xmppHost = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim().toLowerCase();
         xmppPort = mySharedPreferences.getString("prefXmppport", "5222").trim();
         boolean prefNtfy = mySharedPreferences.getBoolean("prefNtfy",true);
         boolean prefSound = mySharedPreferences.getBoolean("prefSound",true);

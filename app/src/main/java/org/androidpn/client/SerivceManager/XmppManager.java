@@ -22,9 +22,13 @@ import android.os.Handler;
 import android.util.Log;
 
 
+import org.androidpn.client.BuildConfig;
+import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.ConnectionListener;
+import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.StanzaListener;
+import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.filter.AndFilter;
 import org.jivesoftware.smack.filter.StanzaFilter;
@@ -32,18 +36,32 @@ import org.jivesoftware.smack.filter.StanzaIdFilter;
 import org.jivesoftware.smack.filter.StanzaTypeFilter;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Stanza;
+import org.jivesoftware.smack.sasl.SASLMechanism;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
+import org.jivesoftware.smack.util.TLSUtils;
 import org.jivesoftware.smackx.iqregister.packet.Registration;
 import org.jivesoftware.smack.provider.ProviderManager;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Future;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import javax.security.auth.callback.CallbackHandler;
 
 /**
  * This class is to manage the XMPP connection between client and server.
@@ -292,24 +310,71 @@ public class XmppManager {
 
         public void run() {
             Log.i(LOGTAG, "ConnectTask.run()...");
-
+            boolean connected = false;
             if (!xmppManager.isConnected()) {
                 // Create the configuration for this new connection
                 XMPPTCPConnectionConfiguration.Builder connConfig = XMPPTCPConnectionConfiguration.builder();
-                //ConnectionConfiguration connConfig = new ConnectionConfiguration(
-                //        xmppHost, xmppPort);
-                // connConfig.setSecurityMode(SecurityMode.disabled);
-                /*
-                connConfig.setSecurityMode(SecurityMode.required);
-                connConfig.setSASLAuthenticationEnabled(false);
+
+                connConfig.setHost(xmppHost);
+                connConfig.setServiceName(xmppHost);
+                connConfig.setPort(xmppPort);
+                connConfig.setDebuggerEnabled(true);
+                connConfig.setUsernameAndPassword(username, password);
+                connConfig.allowEmptyOrNullUsernames();
+                connConfig.setSecurityMode(ConnectionConfiguration.SecurityMode.required);
+                //connConfig.setSASLAuthenticationEnabled(false);
+
                 connConfig.setCompressionEnabled(false);
-                */
-                //connConfig.setUsernameAndPassword(xmppHost, xmppPort);
+                connConfig.setSendPresence(true);
+                //connConfig.setEnabledSSLProtocols(new String[] {"SSLv3","TLSv1.2"});
+                HostnameVerifier verifier = new HostnameVerifier() {
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        if (BuildConfig.DEBUG) {
+                            Log.d(LOGTAG, "Hostname: " + hostname);
+                        }
+                        return true;
+                    }
+                };
+                TrustManager[] trustAllCerts = new TrustManager[] {
+                     new X509TrustManager() {
+                         public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                          return new X509Certificate[0];
+                         }
+                         public void checkClientTrusted(
+                        X509Certificate[] certs,
+                        String authType) {
+                         }
+                         public void checkServerTrusted(
+                        X509Certificate[] certs,
+                        String authType) {
+                         }
+                     }
+                };
+                connConfig.setHostnameVerifier(verifier);
+
+                SSLContext context = null;
+                try {
+                    context = SSLContext.getInstance("SSL");
+                    connConfig.setCustomSSLContext(context);
+                } catch (NoSuchAlgorithmException e) {
+                    Log.e(LOGTAG, "XMPP Algorithm failed", e);
+                }
+                try {
+                    assert context != null;
+                    context.init(null, trustAllCerts, new java.security.SecureRandom());
+                } catch (KeyManagementException e) {
+                    Log.e(LOGTAG, "XMPP Key Management failed", e);
+                }
+
+                //SASLAuthentication.unregisterSASLMechanism("PLAIN");
                 XMPPTCPConnection connection = new XMPPTCPConnection(connConfig.build());
+
                 xmppManager.setConnection(connection);
 
                 try {
                     // Connect to the server
+                    Log.i(LOGTAG, "XMPP trying connect");
                     connection.connect();
                     Log.i(LOGTAG, "XMPP connected successfully");
 
@@ -317,6 +382,8 @@ public class XmppManager {
                     ProviderManager.addIQProvider("notification",
                             "androidpn:iq:notification",
                             new NotificationIQProvider());
+
+                    connected = true;
 
                 } catch (XMPPException e) {
                     Log.e(LOGTAG, "XMPP connection failed", e);
@@ -326,8 +393,9 @@ public class XmppManager {
                     Log.e(LOGTAG, "XMPP io connection failed", e);
                 }
 
-                xmppManager.runTask();
-
+                if (connected) {
+                    xmppManager.runTask();
+                }
             } else {
                 Log.i(LOGTAG, "XMPP connected already");
                 xmppManager.runTask();
