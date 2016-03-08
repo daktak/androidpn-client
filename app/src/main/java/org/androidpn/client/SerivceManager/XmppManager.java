@@ -315,6 +315,7 @@ public class XmppManager {
                     ProviderManager.getInstance().addIQProvider("notification",
                             "androidpn:iq:notification",
                             new NotificationIQProvider());
+                    connected = true;
 
                 } catch (XMPPException e) {
                     Log.e(LOGTAG, "XMPP connection failed", e);
