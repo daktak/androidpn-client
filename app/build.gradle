@@ -7,8 +7,8 @@ android {
         applicationId 'org.androidpn.client'
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 20160308
-        versionName "0.5.7"
+        versionCode 20160310
+        versionName "0.5.8"
     }
     buildTypes {
         release {
