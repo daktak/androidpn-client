@@ -19,3 +19,5 @@ http://yourserver:7072/notification.do?title=titlestring&message=messagestring&b
 ![Alt text](screenshots/serverform.png?raw=true "Server Form")
 ![Alt text](screenshots/notification.png?raw=true "Notification")
 ![Alt text](screenshots/mainactivity.png?raw=true "Application")
+
+Bitcoin donations 13MjTPDFQtxv1u1sWURkDduFSw97KbMfsS
