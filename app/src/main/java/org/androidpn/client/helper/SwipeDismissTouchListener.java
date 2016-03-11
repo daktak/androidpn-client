@@ -19,8 +19,10 @@ package org.androidpn.client.helper;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.app.ListActivity;
 import android.app.ListFragment;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -117,6 +119,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
         mCallbacks = callbacks;
     }
 
+    @TargetApi(12)
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         // offset because the view is translated during swipe
@@ -163,23 +166,29 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
                 }
                 if (dismiss) {
                     // dismiss
-                    mView.animate()
-                            .translationX(dismissRight ? mViewWidth : -mViewWidth)
-                            .alpha(0)
-                            .setDuration(mAnimationTime)
-                            .setListener(new AnimatorListenerAdapter() {
-                                @Override
-                                public void onAnimationEnd(Animator animation) {
-                                    performDismiss();
-                                }
-                            });
+                    if (Build.VERSION.SDK_INT >= 12) {
+                        mView.animate()
+                                .translationX(dismissRight ? mViewWidth : -mViewWidth)
+                                .alpha(0)
+                                .setDuration(mAnimationTime)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        performDismiss();
+                                    }
+                                });
+                    } else {
+                        performDismiss();
+                    }
                 } else if (mSwiping) {
                     // cancel
-                    mView.animate()
-                            .translationX(0)
-                            .alpha(1)
-                            .setDuration(mAnimationTime)
-                            .setListener(null);
+                    if (Build.VERSION.SDK_INT >= 12) {
+                        mView.animate()
+                                .translationX(0)
+                                .alpha(1)
+                                .setDuration(mAnimationTime)
+                                .setListener(null);
+                    }
                 }
                 mVelocityTracker.recycle();
                 mVelocityTracker = null;
@@ -194,12 +203,13 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
                 if (mVelocityTracker == null) {
                     break;
                 }
-
-                mView.animate()
-                        .translationX(0)
-                        .alpha(1)
-                        .setDuration(mAnimationTime)
-                        .setListener(null);
+                if (Build.VERSION.SDK_INT >= 12) {
+                    mView.animate()
+                            .translationX(0)
+                            .alpha(1)
+                            .setDuration(mAnimationTime)
+                            .setListener(null);
+                }
                 mVelocityTracker.recycle();
                 mVelocityTracker = null;
                 mTranslationX = 0;

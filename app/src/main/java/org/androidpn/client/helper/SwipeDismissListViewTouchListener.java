@@ -19,7 +19,9 @@ package org.androidpn.client.helper;
         import android.animation.Animator;
         import android.animation.AnimatorListenerAdapter;
         import android.animation.ValueAnimator;
+        import android.annotation.TargetApi;
         import android.graphics.Rect;
+        import android.os.Build;
         import android.os.SystemClock;
         import android.view.MotionEvent;
         import android.view.VelocityTracker;
@@ -167,6 +169,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
         };
     }
 
+    @TargetApi(12)
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if (mViewWidth < 2) {
@@ -262,23 +265,29 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
                     final View downView = mDownView; // mDownView gets null'd before animation ends
                     final int downPosition = mDownPosition;
                     ++mDismissAnimationRefCount;
-                    mDownView.animate()
-                            .translationX(dismissRight ? mViewWidth : -mViewWidth)
-                            .alpha(0)
-                            .setDuration(mAnimationTime)
-                            .setListener(new AnimatorListenerAdapter() {
-                                @Override
-                                public void onAnimationEnd(Animator animation) {
-                                    performDismiss(downView, downPosition);
-                                }
-                            });
+                    if (Build.VERSION.SDK_INT >= 12) {
+                        mDownView.animate()
+                                .translationX(dismissRight ? mViewWidth : -mViewWidth)
+                                .alpha(0)
+                                .setDuration(mAnimationTime)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        performDismiss(downView, downPosition);
+                                    }
+                                });
+                    } else {
+                        performDismiss(downView, downPosition);
+                    }
                 } else {
                     // cancel
-                    mDownView.animate()
-                            .translationX(0)
-                            .alpha(1)
-                            .setDuration(mAnimationTime)
-                            .setListener(null);
+                    if (Build.VERSION.SDK_INT >= 12) {
+                        mDownView.animate()
+                                .translationX(0)
+                                .alpha(1)
+                                .setDuration(mAnimationTime)
+                                .setListener(null);
+                    }
                 }
                 mVelocityTracker.recycle();
                 mVelocityTracker = null;

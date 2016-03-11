@@ -14,28 +14,21 @@
         android:longClickable="false"
         android:singleLine="false"
         android:textIsSelectable="false" />
-
     <TextView
-        android:text=""
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:linksClickable="false"
-        android:layout_weight="0"
         android:ellipsize="end"
         android:layout_gravity="center_vertical"
         android:gravity="start"
-        android:textAlignment="viewStart"
         android:textAppearance="?android:attr/textAppearanceSearchResultTitle" />
     <TextView
-        android:text=""
         android:id="@+id/tvMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:layout_gravity="center_vertical"
         android:gravity="end"
-        android:textAlignment="viewEnd"
-        android:layout_weight="0"
         android:textAppearance="?android:attr/textAppearance" />
 </LinearLayout>
