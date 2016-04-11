@@ -46,9 +46,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+
 /**
  * This class is to manage the XMPP connection between client and server.
- * 
+ *
  * @author Sehwan Noh (devnoh@gmail.com)
  */
 public class XmppManager {
@@ -75,6 +78,10 @@ public class XmppManager {
 
     private String password;
 
+    private String email;
+
+    private String name;
+
     private ConnectionListener connectionListener;
 
     private PacketListener notificationPacketListener;
@@ -99,6 +106,8 @@ public class XmppManager {
         xmppPort = sharedPrefs.getInt(Constants.XMPP_PORT, 5222);
         username = sharedPrefs.getString(Constants.XMPP_USERNAME, "");
         password = sharedPrefs.getString(Constants.XMPP_PASSWORD, "");
+        email = sharedPrefs.getString(Constants.XMPP_EMAIL, "");
+        name = sharedPrefs.getString(Constants.NAME, "");
 
         connectionListener = new PersistentConnectionListener(this);
         notificationPacketListener = new NotificationPacketListener(this);
@@ -281,7 +290,7 @@ public class XmppManager {
     }
 
     /**
-     * A runnable task to connect the server. 
+     * A runnable task to connect the server.
      */
     private class ConnectTask implements Runnable {
 
@@ -333,7 +342,7 @@ public class XmppManager {
     }
 
     /**
-     * A runnable task to register a new user onto the server. 
+     * A runnable task to register a new user onto the server.
      */
     private class RegisterTask implements Runnable {
 
@@ -349,6 +358,8 @@ public class XmppManager {
             if (!xmppManager.isRegistered()) {
                 final String newUsername = newRandomUUID();
                 final String newPassword = newRandomUUID();
+                username = sharedPrefs.getString(Constants.XMPP_USERNAME, "");
+                password = sharedPrefs.getString(Constants.XMPP_PASSWORD, "");
 
                 Registration registration = new Registration();
 
@@ -375,16 +386,23 @@ public class XmppManager {
                                                             .getCondition());
                                 }
                             } else if (response.getType() == IQ.Type.RESULT) {
-                                xmppManager.setUsername(newUsername);
-                                xmppManager.setPassword(newPassword);
-                                Log.d(LOGTAG, "username=" + newUsername);
-                                Log.d(LOGTAG, "password=" + newPassword);
-
                                 Editor editor = sharedPrefs.edit();
-                                editor.putString(Constants.XMPP_USERNAME,
-                                        newUsername);
-                                editor.putString(Constants.XMPP_PASSWORD,
-                                        newPassword);
+                                Log.d(LOGTAG, "username=" + username);
+                                Log.d(LOGTAG, "password=" + password);
+                                Log.d(LOGTAG, "email=" + email);
+                                if (username.isEmpty()) {
+                                    xmppManager.setUsername(newUsername);
+                                    Log.d(LOGTAG, "username=" + newUsername);
+                                    editor.putString(Constants.XMPP_USERNAME,
+                                            newUsername);
+                                }
+                                if (password.isEmpty()) {
+                                    xmppManager.setPassword(newPassword);
+                                    Log.d(LOGTAG, "password=" + newPassword);
+                                    editor.putString(Constants.XMPP_PASSWORD,
+                                            newPassword);
+                                }
+
                                 editor.apply();
                                 Log
                                         .i(LOGTAG,
@@ -400,8 +418,23 @@ public class XmppManager {
                 registration.setType(IQ.Type.SET);
                 registration.setTo(xmppHost);
                 Map<String, String> attributes = new HashMap<String, String>();
-                attributes.put("username", newUsername);
-                attributes.put("password", newPassword);
+                //this is too late maybe
+                if (username.isEmpty()) {
+                    attributes.put("username", newUsername);
+                } else {
+                    attributes.put("username", username);
+                }
+                if (password.isEmpty()) {
+                    attributes.put("password", newPassword);
+                } else {
+                    attributes.put("password", password);
+                }
+                if (!email.isEmpty()) {
+                    attributes.put("email", email);
+                }
+                if (!name.isEmpty()) {
+                    attributes.put("name", name);
+                }
                 registration.setAttributes(attributes);
                 //registration.setAttributes();
 
@@ -417,7 +450,7 @@ public class XmppManager {
     }
 
     /**
-     * A runnable task to log into the server. 
+     * A runnable task to log into the server.
      */
     private class LoginTask implements Runnable {
 

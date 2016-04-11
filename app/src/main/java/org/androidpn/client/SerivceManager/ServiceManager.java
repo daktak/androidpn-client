@@ -47,6 +47,14 @@ public final class ServiceManager {
 
     private String xmppPort;
 
+    private String email;
+
+    private String user;
+
+    private String pass;
+
+    private String name;
+
     private String callbackActivityPackageName;
 
     private String callbackActivityClassName;
@@ -96,6 +104,11 @@ public final class ServiceManager {
         apiKey = mySharedPreferences.getString("prefApikey", "1234567890").trim();
         xmppHost = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim();
         xmppPort = mySharedPreferences.getString("prefXmppport", "5222").trim();
+        email = mySharedPreferences.getString("prefEmail", "").trim();
+        pass = mySharedPreferences.getString("prefPass", "").trim();
+        user = mySharedPreferences.getString("prefUser", "").trim();
+        name = mySharedPreferences.getString("prefName", "").trim();
+
         boolean prefNtfy = mySharedPreferences.getBoolean("prefNtfy",true);
         boolean prefSound = mySharedPreferences.getBoolean("prefSound",true);
         boolean prefVibrate = mySharedPreferences.getBoolean("prefVibrate",true);
@@ -105,6 +118,10 @@ public final class ServiceManager {
         Log.i(LOGTAG, "xmppHost=" + xmppHost);
         Log.i(LOGTAG, "xmppPort=" + xmppPort);
 
+        Log.i(LOGTAG, "user=" + user);
+        Log.i(LOGTAG, "name=" + name);
+        Log.i(LOGTAG, "pass=" + pass);
+
         sharedPrefs = context.getSharedPreferences(
                 Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         Editor editor = sharedPrefs.edit();
@@ -112,6 +129,10 @@ public final class ServiceManager {
         editor.putString(Constants.API_KEY, apiKey);
         editor.putString(Constants.VERSION, version);
         editor.putString(Constants.XMPP_HOST, xmppHost);
+        editor.putString(Constants.XMPP_USERNAME, user);
+        editor.putString(Constants.XMPP_PASSWORD, pass);
+        editor.putString(Constants.XMPP_EMAIL, email);
+        editor.putString(Constants.NAME, name);
         try {
             editor.remove(Constants.SETTINGS_NOTIFICATION_ENABLED);
             editor.remove(Constants.SETTINGS_SOUND_ENABLED);

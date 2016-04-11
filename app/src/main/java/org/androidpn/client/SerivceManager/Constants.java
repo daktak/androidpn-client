@@ -40,7 +40,11 @@ public class Constants {
 
     public static final String XMPP_USERNAME = "XMPP_USERNAME";
 
+    public static final String NAME = "NAME";
+
     public static final String XMPP_PASSWORD = "XMPP_PASSWORD";
+
+    public static final String XMPP_EMAIL = "XMPP_EMAIL";
 
     // public static final String USER_KEY = "USER_KEY";
 
