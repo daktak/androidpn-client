@@ -67,11 +67,19 @@ public final class ServiceManager {
         String apiKeynew = mySharedPreferences.getString("prefApikey", "1234567890").trim();
         String xmppHostnew = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim();
         String xmppPortnew = mySharedPreferences.getString("prefXmppport", "5222").trim();
+        String usernew = mySharedPreferences.getString("prefUser", "").trim();
+        String namenew = mySharedPreferences.getString("prefName", "").trim();
+        String passnew = mySharedPreferences.getString("prefPass", "").trim();
+        String emailnew = mySharedPreferences.getString("prefEmail", "").trim();
 
         if (!(apiKeynew.contentEquals(apiKey) &&
                 xmppHostnew.contentEquals(xmppHost) &&
-                xmppPortnew.contentEquals(xmppPort))) {
-            Log.d(LOGTAG, xmppHost + " : " + xmppHostnew);
+                xmppPortnew.contentEquals(xmppPort) &&
+                usernew.contentEquals(user) &&
+                namenew.contentEquals(name) &&
+                passnew.contentEquals(pass) &&
+                emailnew.contentEquals(email)
+                )) {
             newSettings = true;
         }
         return newSettings;
@@ -120,7 +128,7 @@ public final class ServiceManager {
 
         Log.i(LOGTAG, "user=" + user);
         Log.i(LOGTAG, "name=" + name);
-        Log.i(LOGTAG, "pass=" + pass);
+        Log.i(LOGTAG, "email=" + email);
 
         sharedPrefs = context.getSharedPreferences(
                 Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);

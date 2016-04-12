@@ -358,8 +358,6 @@ public class XmppManager {
             if (!xmppManager.isRegistered()) {
                 final String newUsername = newRandomUUID();
                 final String newPassword = newRandomUUID();
-                username = sharedPrefs.getString(Constants.XMPP_USERNAME, "");
-                password = sharedPrefs.getString(Constants.XMPP_PASSWORD, "");
 
                 Registration registration = new Registration();
 
@@ -388,7 +386,7 @@ public class XmppManager {
                             } else if (response.getType() == IQ.Type.RESULT) {
                                 Editor editor = sharedPrefs.edit();
                                 Log.d(LOGTAG, "username=" + username);
-                                Log.d(LOGTAG, "password=" + password);
+                                Log.d(LOGTAG, "name=" + name);
                                 Log.d(LOGTAG, "email=" + email);
                                 if (username.isEmpty()) {
                                     xmppManager.setUsername(newUsername);
@@ -418,17 +416,10 @@ public class XmppManager {
                 registration.setType(IQ.Type.SET);
                 registration.setTo(xmppHost);
                 Map<String, String> attributes = new HashMap<String, String>();
-                //this is too late maybe
-                if (username.isEmpty()) {
-                    attributes.put("username", newUsername);
-                } else {
-                    attributes.put("username", username);
-                }
-                if (password.isEmpty()) {
-                    attributes.put("password", newPassword);
-                } else {
-                    attributes.put("password", password);
-                }
+                Log.d(LOGTAG, "Logging in with username=" + username);
+                attributes.put("username", username);
+                attributes.put("password", password);
+
                 if (!email.isEmpty()) {
                     attributes.put("email", email);
                 }
@@ -464,8 +455,6 @@ public class XmppManager {
             Log.i(LOGTAG, "LoginTask.run()...");
 
             if (!xmppManager.isAuthenticated()) {
-                Log.d(LOGTAG, "username=" + username);
-                Log.d(LOGTAG, "password=" + password);
 
                 try {
                     xmppManager.getConnection().login(
