@@ -29,4 +29,13 @@
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="rationale_phone_state">Phone state required for listening for notification.</string>
+    <string name="user">Username</string>
+    <string name="user_pref">Leave blank for default</string>
+    <string name="password">Password</string>
+    <string name="pass_pref">Leave blank for default</string>
+    <string name="email">Email</string>
+    <string name="email_pref">Optional email address</string>
+    <string name="login_set">Login Settings</string>
+    <string name="name">Name</string>
+    <string name="name_pref">Display name</string>
 </resources>

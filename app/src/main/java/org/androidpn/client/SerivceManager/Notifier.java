@@ -15,6 +15,7 @@
  */
 package org.androidpn.client.SerivceManager;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -22,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.NotificationBuilderWithBuilderAccessor;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -55,6 +58,17 @@ public class Notifier {
                 Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         this.notificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+
+    @TargetApi(16)
+    private void notify(Notification.Builder notificationBuilder) {
+
+
+        if (Build.VERSION.SDK_INT < 16) {
+            notificationManager.notify(random.nextInt(), notificationBuilder.getNotification());
+        } else {
+            notificationManager.notify(random.nextInt(), notificationBuilder.build());
+        }
     }
 
     public void notify(String notificationId, String apiKey, String title,
@@ -106,7 +120,7 @@ public class Notifier {
             PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
                     intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            Notification notification = new Notification.Builder(context)
+            Notification.Builder notification = new Notification.Builder(context)
                     .setContentTitle(title)
                     .setContentText(message)
                     .setSmallIcon(getNotificationIcon())
@@ -114,8 +128,9 @@ public class Notifier {
                     .setContentIntent(contentIntent)
                     //.setLargeIcon(R.drawable.notification)
                     .setWhen(System.currentTimeMillis())
-                    .setTicker(message)
-                    .build();
+                    .setTicker(message);
+
+            notify(notification);
 
             //notification.flags |= PNNotification.FLAG_AUTO_CANCEL;
 
@@ -139,7 +154,7 @@ public class Notifier {
 
             //notification.setLatestEventInfo(context, title, message,
             //        contentIntent);
-            notificationManager.notify(random.nextInt(), notification);
+            //notificationManager.notify(random.nextInt(), notification);
 
             //            Intent clickIntent = new Intent(
             //                    Constants.ACTION_NOTIFICATION_CLICKED);

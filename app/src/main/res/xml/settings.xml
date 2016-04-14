@@ -24,6 +24,28 @@
             android:summary="@string/pref_auto"
             android:title="@string/auto" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/login_set" >
+  <!--  <EditTextPreference
+        android:title="@string/user"
+        android:summary="@string/user_pref"
+        android:defaultValue=""
+        android:key="prefUser"/>
+    <EditTextPreference
+        android:title="@string/password"
+        android:summary="@string/pass_pref"
+        android:defaultValue=""
+        android:key="prefPass"/> -->
+        <EditTextPreference
+            android:title="@string/name"
+            android:summary="@string/name_pref"
+            android:defaultValue=""
+            android:key="prefName"/>
+    <EditTextPreference
+        android:title="@string/email"
+        android:summary="@string/email_pref"
+        android:defaultValue=""
+        android:key="prefEmail"/>
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/display" >
         <ListPreference android:title="@string/theme"
             android:key="theme"

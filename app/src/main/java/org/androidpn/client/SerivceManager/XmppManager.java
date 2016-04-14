@@ -48,7 +48,7 @@ import java.util.concurrent.Future;
 
 /**
  * This class is to manage the XMPP connection between client and server.
- * 
+ *
  * @author Sehwan Noh (devnoh@gmail.com)
  */
 public class XmppManager {
@@ -75,6 +75,14 @@ public class XmppManager {
 
     private String password;
 
+    private String newUsername;
+
+    private String newPassword;
+
+    private String email;
+
+    private String name;
+
     private ConnectionListener connectionListener;
 
     private PacketListener notificationPacketListener;
@@ -99,6 +107,8 @@ public class XmppManager {
         xmppPort = sharedPrefs.getInt(Constants.XMPP_PORT, 5222);
         username = sharedPrefs.getString(Constants.XMPP_USERNAME, "");
         password = sharedPrefs.getString(Constants.XMPP_PASSWORD, "");
+        email = sharedPrefs.getString(Constants.XMPP_EMAIL, "");
+        name = sharedPrefs.getString(Constants.NAME, "");
 
         connectionListener = new PersistentConnectionListener(this);
         notificationPacketListener = new NotificationPacketListener(this);
@@ -235,8 +245,7 @@ public class XmppManager {
     }
 
     private boolean isRegistered() {
-        return sharedPrefs.contains(Constants.XMPP_USERNAME)
-                && sharedPrefs.contains(Constants.XMPP_PASSWORD);
+        return sharedPrefs.contains(Constants.XMPP_REGISTERED);
     }
 
     private void submitConnectTask() {
@@ -275,13 +284,12 @@ public class XmppManager {
 
     private void removeAccount() {
         Editor editor = sharedPrefs.edit();
-        editor.remove(Constants.XMPP_USERNAME);
-        editor.remove(Constants.XMPP_PASSWORD);
+        editor.remove(Constants.XMPP_REGISTERED);
         editor.apply();
     }
 
     /**
-     * A runnable task to connect the server. 
+     * A runnable task to connect the server.
      */
     private class ConnectTask implements Runnable {
 
@@ -333,7 +341,7 @@ public class XmppManager {
     }
 
     /**
-     * A runnable task to register a new user onto the server. 
+     * A runnable task to register a new user onto the server.
      */
     private class RegisterTask implements Runnable {
 
@@ -347,8 +355,10 @@ public class XmppManager {
             Log.i(LOGTAG, "RegisterTask.run()...");
 
             if (!xmppManager.isRegistered()) {
-                final String newUsername = newRandomUUID();
-                final String newPassword = newRandomUUID();
+                newUsername = username;
+                if (username.isEmpty()){ newUsername = newRandomUUID(); }
+                newPassword = password;
+                if (password.isEmpty()) { newPassword = newRandomUUID(); }
 
                 Registration registration = new Registration();
 
@@ -381,6 +391,9 @@ public class XmppManager {
                                 Log.d(LOGTAG, "password=" + newPassword);
 
                                 Editor editor = sharedPrefs.edit();
+                                editor.putBoolean(Constants.XMPP_REGISTERED, true);
+                                editor.remove(Constants.XMPP_USERNAME);
+                                editor.remove(Constants.XMPP_PASSWORD);
                                 editor.putString(Constants.XMPP_USERNAME,
                                         newUsername);
                                 editor.putString(Constants.XMPP_PASSWORD,
@@ -402,6 +415,12 @@ public class XmppManager {
                 Map<String, String> attributes = new HashMap<String, String>();
                 attributes.put("username", newUsername);
                 attributes.put("password", newPassword);
+                if (!email.isEmpty()) {
+                    attributes.put("email", email);
+                }
+                if (!name.isEmpty()) {
+                    attributes.put("name", name);
+                }
                 registration.setAttributes(attributes);
                 //registration.setAttributes();
 
@@ -417,7 +436,7 @@ public class XmppManager {
     }
 
     /**
-     * A runnable task to log into the server. 
+     * A runnable task to log into the server.
      */
     private class LoginTask implements Runnable {
 
@@ -432,7 +451,7 @@ public class XmppManager {
 
             if (!xmppManager.isAuthenticated()) {
                 Log.d(LOGTAG, "username=" + username);
-                Log.d(LOGTAG, "password=" + password);
+                //Log.d(LOGTAG, "password=" + password);
 
                 try {
                     xmppManager.getConnection().login(

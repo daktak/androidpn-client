@@ -7,9 +7,11 @@ import org.androidpn.client.helper.SwipeDismissListViewTouchListener;
 import org.androidpn.client.helper.fixTheme;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @TargetApi(11)
     public void resetList() {
         datasource = new PNNotificationDataSource(this);
         datasource.open();
@@ -117,12 +120,20 @@ public class MainActivity extends AppCompatActivity
             }
             // create the adapter using the cursor pointing to the desired data
             //as well as the layout information
-            dataAdapter = new SimpleCursorAdapter(
-                    this, R.layout.row,
-                    cursor,
-                    columns,
-                    to,
-                    0);
+            if (Build.VERSION.SDK_INT < 11) {
+                dataAdapter = new SimpleCursorAdapter(
+                        this, R.layout.row,
+                        cursor,
+                        columns,
+                        to);
+            } else {
+                dataAdapter = new SimpleCursorAdapter(
+                        this, R.layout.row,
+                        cursor,
+                        columns,
+                        to,
+                        0);
+            }
 
             // Assign adapter to ListView
             dataAdapter.notifyDataSetChanged();
