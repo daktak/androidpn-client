@@ -1,5 +1,6 @@
 package org.androidpn.client;
 
+import org.androidpn.client.SerivceManager.Constants;
 import org.androidpn.client.SerivceManager.LogUtil;
 import org.androidpn.client.SerivceManager.ServiceManager;
 import org.androidpn.client.helper.EasyPermissions;
@@ -171,7 +172,24 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        String status = getString(R.string.disconnected);
+        MenuItem item = menu.findItem(R.id.connection_status);
+        if (serviceManager != null) {
+            if(serviceManager.isLoggedIn()){
+                status = getString(R.string.connected);
+                //item.setEnabled(false);
+            }
+        }
+
+        item.setTitle(status);
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -194,6 +212,20 @@ public class MainActivity extends AppCompatActivity
 //            dataAdapter.notifyDataSetChanged();
             datasource.close();
             resetList();
+        }
+        if (id == R.id.connection_status) {
+            Log.d(LOGTAG, "Restarting sm");
+            if (serviceManager != null) {
+
+                serviceManager.stopService();
+                serviceManager.setSettings();
+                serviceManager.startService();
+
+            } else {
+                serviceManager = new ServiceManager(this);
+                serviceManager.setNotificationIcon(R.drawable.notification);
+                serviceManager.startService();
+            }
         }
 
         return super.onOptionsItemSelected(item);

@@ -129,6 +129,12 @@ public class XmppManager {
 
     public void disconnect() {
         Log.d(LOGTAG, "disconnect()...");
+        if (sharedPrefs.contains(Constants.XMPP_LOGGEDIN)) {
+            Editor editor = sharedPrefs.edit();
+            editor.remove(Constants.XMPP_LOGGEDIN);
+            editor.remove(Constants.XMPP_REGISTERED);
+            editor.apply();
+        }
         terminatePersistentConnection();
     }
 
@@ -285,6 +291,7 @@ public class XmppManager {
     private void removeAccount() {
         Editor editor = sharedPrefs.edit();
         editor.remove(Constants.XMPP_REGISTERED);
+        editor.remove(Constants.XMPP_LOGGEDIN);
         editor.apply();
     }
 
@@ -391,7 +398,7 @@ public class XmppManager {
                                 Log.d(LOGTAG, "password=" + newPassword);
 
                                 Editor editor = sharedPrefs.edit();
-                                editor.putBoolean(Constants.XMPP_REGISTERED, true);
+                                editor.putString(Constants.XMPP_REGISTERED, "true");
                                 editor.remove(Constants.XMPP_USERNAME);
                                 editor.remove(Constants.XMPP_PASSWORD);
                                 editor.putString(Constants.XMPP_USERNAME,
@@ -457,6 +464,9 @@ public class XmppManager {
                     xmppManager.getConnection().login(
                             xmppManager.getUsername(),
                             xmppManager.getPassword(), XMPP_RESOURCE_NAME);
+                    Editor editor = sharedPrefs.edit();
+                    editor.putString(Constants.XMPP_LOGGEDIN, "true");
+                    editor.apply();
                     Log.d(LOGTAG, "Loggedn in successfully");
 
                     // connection listener
@@ -497,6 +507,11 @@ public class XmppManager {
                 }
 
             } else {
+                if (!(sharedPrefs.contains(Constants.XMPP_LOGGEDIN))) {
+                    Editor editor = sharedPrefs.edit();
+                    editor.putString(Constants.XMPP_LOGGEDIN, "true");
+                    editor.apply();
+                }
                 Log.i(LOGTAG, "Logged in already");
                 xmppManager.runTask();
             }
