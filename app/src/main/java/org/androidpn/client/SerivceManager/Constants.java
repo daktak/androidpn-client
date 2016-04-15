@@ -46,6 +46,8 @@ public class Constants {
 
     public static final String XMPP_REGISTERED = "XMPP_REGISTERED";
 
+    public static final String XMPP_LOGGEDIN = "XMPP_LOGGEDIN";
+
     public static final String XMPP_EMAIL = "XMPP_EMAIL";
 
     // public static final String USER_KEY = "USER_KEY";

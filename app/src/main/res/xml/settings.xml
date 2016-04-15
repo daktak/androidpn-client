@@ -25,7 +25,7 @@
             android:title="@string/auto" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/login_set" >
-  <!--  <EditTextPreference
+    <!-- <EditTextPreference
         android:title="@string/user"
         android:summary="@string/user_pref"
         android:defaultValue=""

@@ -97,6 +97,15 @@ public final class ServiceManager {
         setSettings();
     }
 
+    public boolean isLoggedIn() {
+        boolean out = false;
+        sharedPrefs = context.getSharedPreferences(
+                Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        if (sharedPrefs.contains(Constants.XMPP_LOGGEDIN)) {
+            out = true;
+        }
+        return out;
+    }
     public void setSettings() {
 
         //        apiKey = getMetaDataValue("ANDROIDPN_API_KEY");

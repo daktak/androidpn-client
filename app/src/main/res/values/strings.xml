@@ -37,5 +37,7 @@
     <string name="email_pref">Optional email address</string>
     <string name="login_set">Login Settings</string>
     <string name="name">Name</string>
-    <string name="name_pref">Display name</string>
+    <string name="name_pref">Optional display name</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
 </resources>

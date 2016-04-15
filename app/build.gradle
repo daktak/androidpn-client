@@ -7,8 +7,8 @@ android {
         applicationId 'org.androidpn.client'
         minSdkVersion 11
         targetSdkVersion 23
-        versionCode 20160414
-        versionName "0.5.9"
+        versionCode 20160415
+        versionName "0.5.10"
     }
     buildTypes {
         release {
@@ -49,7 +49,7 @@ dependencies {
 
 android {
     lintOptions {
-    	disable 'InnerclassSeparator','GoogleAppIndexingWarning','InvalidPackage','IconDensities','MissingTranslation','TrustAllX509TrustManager'
+    	disable 'InnerclassSeparator','GoogleAppIndexingWarning','InvalidPackage','IconDensities','MissingTranslation','TrustAllX509TrustManager','UnusedResources'
 	checkReleaseBuilds false
     }
 }
