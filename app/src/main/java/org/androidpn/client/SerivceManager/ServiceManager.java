@@ -49,10 +49,6 @@ public final class ServiceManager {
 
     private String email;
 
-    private String user;
-
-    private String pass;
-
     private String name;
 
     private String callbackActivityPackageName;
@@ -67,17 +63,15 @@ public final class ServiceManager {
         String apiKeynew = mySharedPreferences.getString("prefApikey", "1234567890").trim();
         String xmppHostnew = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim();
         String xmppPortnew = mySharedPreferences.getString("prefXmppport", "5222").trim();
-        String usernew = mySharedPreferences.getString("prefUser", "").trim();
+        //String usernew = mySharedPreferences.getString("prefUser", "").trim();
         String namenew = mySharedPreferences.getString("prefName", "").trim();
-        String passnew = mySharedPreferences.getString("prefPass", "").trim();
+        //String passnew = mySharedPreferences.getString("prefPass", "").trim();
         String emailnew = mySharedPreferences.getString("prefEmail", "").trim();
 
         if (!(apiKeynew.contentEquals(apiKey) &&
                 xmppHostnew.contentEquals(xmppHost) &&
                 xmppPortnew.contentEquals(xmppPort) &&
-                usernew.contentEquals(user) &&
                 namenew.contentEquals(name) &&
-                passnew.contentEquals(pass) &&
                 emailnew.contentEquals(email)
                 )) {
             newSettings = true;
@@ -98,13 +92,17 @@ public final class ServiceManager {
     }
 
     public boolean isLoggedIn() {
+        return sharedPrefs.contains(Constants.XMPP_USERNAME)
+                && sharedPrefs.contains(Constants.XMPP_PASSWORD)
+                && sharedPrefs.contains(Constants.XMPP_LOGGEDIN);
+        /*
         boolean out = false;
         sharedPrefs = context.getSharedPreferences(
                 Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         if (sharedPrefs.contains(Constants.XMPP_LOGGEDIN)) {
             out = true;
         }
-        return out;
+        return out;*/
     }
     public void setSettings() {
 
@@ -122,8 +120,6 @@ public final class ServiceManager {
         xmppHost = mySharedPreferences.getString("prefXmpphost", "192.168.0.1").trim();
         xmppPort = mySharedPreferences.getString("prefXmppport", "5222").trim();
         email = mySharedPreferences.getString("prefEmail", "").trim();
-        pass = mySharedPreferences.getString("prefPass", "").trim();
-        user = mySharedPreferences.getString("prefUser", "").trim();
         name = mySharedPreferences.getString("prefName", "").trim();
 
         boolean prefNtfy = mySharedPreferences.getBoolean("prefNtfy",true);
@@ -135,7 +131,6 @@ public final class ServiceManager {
         Log.i(LOGTAG, "xmppHost=" + xmppHost);
         Log.i(LOGTAG, "xmppPort=" + xmppPort);
 
-        Log.i(LOGTAG, "user=" + user);
         Log.i(LOGTAG, "name=" + name);
         Log.i(LOGTAG, "email=" + email);
 
@@ -146,8 +141,6 @@ public final class ServiceManager {
         editor.putString(Constants.API_KEY, apiKey);
         editor.putString(Constants.VERSION, version);
         editor.putString(Constants.XMPP_HOST, xmppHost);
-        editor.putString(Constants.XMPP_USERNAME, user);
-        editor.putString(Constants.XMPP_PASSWORD, pass);
         editor.putString(Constants.XMPP_EMAIL, email);
         editor.putString(Constants.NAME, name);
         try {

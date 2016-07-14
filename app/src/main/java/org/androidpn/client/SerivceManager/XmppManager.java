@@ -251,7 +251,11 @@ public class XmppManager {
     }
 
     private boolean isRegistered() {
-        return sharedPrefs.contains(Constants.XMPP_REGISTERED);
+        return sharedPrefs.contains(Constants.XMPP_USERNAME)
+            && sharedPrefs.contains(Constants.XMPP_PASSWORD);
+        //    && email.equalsIgnoreCase(sharedPrefs.getString(Constants.XMPP_EMAIL, ""))
+        //&& name.equalsIgnoreCase(sharedPrefs.getString(Constants.NAME, ""));
+        //return sharedPrefs.contains(Constants.XMPP_REGISTERED);
     }
 
     private void submitConnectTask() {
@@ -290,7 +294,9 @@ public class XmppManager {
 
     private void removeAccount() {
         Editor editor = sharedPrefs.edit();
-        editor.remove(Constants.XMPP_REGISTERED);
+        editor.remove(Constants.XMPP_USERNAME);
+        editor.remove(Constants.XMPP_PASSWORD);
+        //editor.remove(Constants.XMPP_REGISTERED);
         editor.remove(Constants.XMPP_LOGGEDIN);
         editor.apply();
     }
@@ -398,7 +404,7 @@ public class XmppManager {
                                 Log.d(LOGTAG, "password=" + newPassword);
 
                                 Editor editor = sharedPrefs.edit();
-                                editor.putString(Constants.XMPP_REGISTERED, "true");
+                                //editor.putString(Constants.XMPP_REGISTERED, "true");
                                 editor.remove(Constants.XMPP_USERNAME);
                                 editor.remove(Constants.XMPP_PASSWORD);
                                 editor.putString(Constants.XMPP_USERNAME,
