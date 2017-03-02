@@ -23,6 +23,7 @@ import android.util.Log;
 
 
 import org.androidpn.client.BuildConfig;
+import org.jivesoftware.smack.ReconnectionManager;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.SASLAuthentication;
@@ -321,6 +322,9 @@ public class XmppManager {
                 connConfig.setDebuggerEnabled(true);
                 connConfig.setUsernameAndPassword(username, password);
                 connConfig.allowEmptyOrNullUsernames();
+		if (BuildConfig.DEBUG) {
+			connConfig.setDebuggerEnabled(true);
+		}
                 connConfig.setSecurityMode(ConnectionConfiguration.SecurityMode.required);
                 //connConfig.setSASLAuthenticationEnabled(false);
 
@@ -368,6 +372,7 @@ public class XmppManager {
                 }
 
                 //SASLAuthentication.unregisterSASLMechanism("PLAIN");
+		//AbstractXMPPConnection connection = new AbstractXMPPConnection(connConfig.build());
                 XMPPTCPConnection connection = new XMPPTCPConnection(connConfig.build());
 
                 xmppManager.setConnection(connection);
@@ -375,23 +380,39 @@ public class XmppManager {
                 try {
                     // Connect to the server
                     Log.i(LOGTAG, "XMPP trying connect");
-                    connection.connect();
+		    /*
+                    connection.addConnectionListener(connectionListener);
+		    connection.setPacketReplyTimeout(10000);
+		    connection.addStanzaAcknowledgedListener(new StanzaListener() {
+		    @Override
+	            public void processPacket(Stanza packet) throws SmackException.NotConnectedException {
+			    String id = packet.getStanzaId();
+			    if ((id == null) || (id == "")) {
+				return;
+			    }
+			    //stanzaAcknowledged(id);
+			}
+		    });
+
+    ReconnectionManager reconnectionManager = ReconnectionManager.getInstanceFor(connection);
+    reconnectionManager.setEnabledPerDefault(true);
+    reconnectionManager.enableAutomaticReconnection();
+                    */
+		    connection.connect().login();
                     Log.i(LOGTAG, "XMPP connected successfully");
 
                     // packet provider
                     ProviderManager.addIQProvider("notification",
                             "androidpn:iq:notification",
                             new NotificationIQProvider());
-
                     connected = true;
-
                 } catch (XMPPException e) {
                     Log.e(LOGTAG, "XMPP connection failed", e);
                 } catch (SmackException e) {
                     Log.e(LOGTAG, "XMPP smack failed", e);
                 } catch (IOException e) {
-                    Log.e(LOGTAG, "XMPP io connection failed", e);
-                }
+                    Log.e(LOGTAG, "XMPP io connection failed", e); 
+                } 
 
                 if (connected) {
                     xmppManager.runTask();

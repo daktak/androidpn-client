@@ -1,2 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-extensions/4.1.9/da434f6aaed8828d8a08bd52332d9f6c44192b89/smack-extensions-4.1.9.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="da434f6aaed8828d8a08bd52332d9f6c44192b89">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/smack-extensions-4.1.9_a536b846e39f8515e8bc5e134921f04600bff0f6.jar" />
+    </item>
+    <item
+        jar="/home/user/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/jars/libs/internal_impl-23.2.0.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="6e239441500605809818997dd63b62a947195f8c">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/internal_impl-23.2.0_d65edaa4b465db0f92a3804217d022de5fa62b31.jar" />
+    </item>
+    <item
+        jar="/home/user/android/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/23.2.0/support-annotations-23.2.0.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="c5bf571bb10462bd90e5419ade67793f71acbc87">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/support-annotations-23.2.0_d7fcc9a7c96fe2275b877b3724d22219eb39fafd.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-android-extensions/4.1.9/a0a29f02ea27c164d5708bd142136365f7498cb/smack-android-extensions-4.1.9.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="0a0a29f02ea27c164d5708bd142136365f7498cb">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/smack-android-extensions-4.1.9_e30d142ae272cd853b25ff4b255637eae716667a.jar" />
+    </item>
+    <item
+        jar="/home/user/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="292a9fa091757208efa65e77eef63088247e51f3">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/com.android.support-support-vector-drawable-23.2.0_6ad4b2b93760846380b7b23bbfd57921fa2e0f31.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/de.measite.minidns/minidns/0.1.7/993582d1455b93a5723d2af4b39d8679735b3550/minidns-0.1.7.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="993582d1455b93a5723d2af4b39d8679735b3550">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/minidns-0.1.7_2a1feb98650486b3a30a5286ad8ceb0c8cc4103f.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-tcp/4.1.9/943bff83276a63e552cd764e3d6f6c8b899d3c7a/smack-tcp-4.1.9.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="943bff83276a63e552cd764e3d6f6c8b899d3c7a">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/smack-tcp-4.1.9_e1b243fa4c25575510fcd404187b0cb69b7e2648.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-resolver-minidns/4.1.9/38b17a79852bfd271f4989f4a14b5bc42d3d7667/smack-resolver-minidns-4.1.9.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="38b17a79852bfd271f4989f4a14b5bc42d3d7667">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/smack-resolver-minidns-4.1.9_01323557e53f26464192b4fd57588fdcb35ea1d6.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-android/4.1.9/20bde3e6cccc5a7dc2cb30e8b4c788cc3ce9f9c9/smack-android-4.1.9.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="20bde3e6cccc5a7dc2cb30e8b4c788cc3ce9f9c9">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/smack-android-4.1.9_f7ac35c4f3e9fc57c0e97dbb295942cbfd0e734a.jar" />
+    </item>
+    <item
+        jar="/home/user/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="d4c936aa8c7d2522c82e3f1829c791d9e367f009">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/com.android.support-recyclerview-v7-23.2.0_dd4dc678695d40ac238e6f315c634dd1fd87b0ab.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-core/4.1.9/4b89d9060b21d108fffe465f34ab242336630d53/smack-core-4.1.9.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="4b89d9060b21d108fffe465f34ab242336630d53">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/smack-core-4.1.9_958e16ae6ced6df9587881945beaca65d6af54ab.jar" />
+    </item>
+    <item
+        jar="/home/user/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="8c108c22c99e794eff255bb34d2a461200c4cbb0">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/com.android.support-animated-vector-drawable-23.2.0_2270e6b25127fee7ff392950e104f857345071fb.jar" />
+    </item>
+    <item
+        jar="/home/user/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/design/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="1aa5b025efe97f5006f5be16d6ca67c6c3c0c0d8">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/com.android.support-design-23.2.0_753fc0dac5fa3c0ef49a0eef859e7ae2a2454d87.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-sasl-provided/4.1.9/ba559437da8e6171a8f61e4ae0d1656424d904db/smack-sasl-provided-4.1.9.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="ba559437da8e6171a8f61e4ae0d1656424d904db">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/smack-sasl-provided-4.1.9_238382e2539f8fa6bee062d4eff2ee8b4b9359c1.jar" />
+    </item>
+    <item
+        jar="/home/user/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="e5f32fa48a3eb2de0c987025c11b6e3864b634d9">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/com.android.support-support-v4-23.2.0_3936bb3f892ffb27369600a0faaff4acca1a1a74.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-im/4.1.9/376c7822cd5ff9cba4ddbce06f8e6eb59b535949/smack-im-4.1.9.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="376c7822cd5ff9cba4ddbce06f8e6eb59b535949">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/smack-im-4.1.9_ebc99fa8e19af999f725840aa330f03b13fec569.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.jxmpp/jxmpp-util-cache/0.4.2/4aa590f2a44d49444dcd3bb082017bf0b46f2ff7/jxmpp-util-cache-0.4.2.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="4aa590f2a44d49444dcd3bb082017bf0b46f2ff7">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/jxmpp-util-cache-0.4.2_967fcd0c0dfa3d67640bbf95afe205c63e4bcc25.jar" />
+    </item>
+    <item
+        jar="/home/user/androidpn-client/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="6e3578f92f7462d1a935a1d36173e3bdd1234976">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/com.android.support-appcompat-v7-23.2.0_6f274f5898278313914523249687f6fc603c9275.jar" />
+    </item>
+    <item
+        jar="/home/user/.gradle/caches/modules-2/files-2.1/org.jxmpp/jxmpp-core/0.4.2/a4c8ce09be6ec90479be74290e381de4288c9569/jxmpp-core-0.4.2.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="a4c8ce09be6ec90479be74290e381de4288c9569">
+        <dex dex="/home/user/androidpn-client/app/build/intermediates/pre-dexed/release/jxmpp-core-0.4.2_9f406adacfad7c9675f5b1f926d10c7fda38c08b.jar" />
+    </item>
+
+</items>
