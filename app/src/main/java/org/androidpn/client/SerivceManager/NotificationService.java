@@ -15,6 +15,7 @@
  */
 package org.androidpn.client.SerivceManager;
 
+import android.provider.Settings.Secure;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -90,7 +91,7 @@ public class NotificationService extends Service {
                 Context.MODE_PRIVATE);
 
         // Get deviceId
-        deviceId = telephonyManager.getDeviceId();
+	deviceId = Secure.getString(getApplicationContext().getContentResolver(), Secure.ANDROID_ID); 
         // Log.d(LOGTAG, "deviceId=" + deviceId);
         Editor editor = sharedPrefs.edit();
         editor.putString(Constants.DEVICE_ID, deviceId);
